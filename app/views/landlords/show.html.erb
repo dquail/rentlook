@@ -1,0 +1,28 @@
+<p>
+  <b>Firstname:</b>
+  <%=h @landlord.firstname %>
+</p>
+
+<p>
+  <b>Lastname:</b>
+  <%=h @landlord.lastname %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @landlord.email %>
+</p>
+
+<p>
+  <b>Hashed password:</b>
+  <%=h @landlord.hashed_password %>
+</p>
+
+<p>
+  <b>Salt:</b>
+  <%=h @landlord.salt %>
+</p>
+
+
+<%= link_to 'Edit', edit_landlord_path(@landlord) %> |
+<%= link_to 'Back', landlords_path %>

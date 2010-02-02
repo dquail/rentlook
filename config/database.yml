@@ -41,8 +41,8 @@ production:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: rentlook_production
+  database: rentloo_production
   pool: 5
-  username: root
-  password: 
+  username: rentloo_root
+  password: helama28
   socket: /tmp/mysql.sock
