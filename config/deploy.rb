@@ -28,6 +28,9 @@ set :use_sudo, false
 set :deploy_to, "/home/#{user}/#{application}"
 
 
+set :rails_env, :production
+set :chmod755, %w(app config db public vendor script tmp public/dispatch.cgi public/dispatch.fcgi public/dispatch.rb)
+
 
 # =============================================================================
 # FCGI TASKS
@@ -44,4 +47,19 @@ desc "Restart the FCGI Process"
 task :restart, :roles => :app do
   run "cd #{current_path}; killall dispatch.fcgi"
   cleanup
+end
+
+deploy.task :start do
+ # nothing
+end
+
+# =============================================================================
+# TASKS
+# =============================================================================
+
+desc "Set the proper permissions for directories and files on HostingRails accounts"
+task :after_deploy do
+  run(chmod755.collect do |item|
+    "chmod 755 #{current_path}/#{item}"
+  end.join(" && "))
 end
