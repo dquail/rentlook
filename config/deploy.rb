@@ -45,7 +45,7 @@ end
 
 desc "Restart the FCGI Process"
 task :restart, :roles => :app do
-  run "cd #{current_path}; killall dispatch.fcgi"
+  run "cd #{current_path}; pkill -9 -u rentloo dispatch.fcgi"
   cleanup
 end
 
