@@ -1,4 +1,4 @@
-<h1>Editing landlord</h1>
+<h1>Editing Landlord</h1>
 
 <% form_for(@landlord) do |f| %>
   <%= f.error_messages %>
@@ -16,12 +16,12 @@
     <%= f.text_field :email %>
   </p>
   <p>
-    <%= f.label :hashed_password %><br />
-    <%= f.text_field :hashed_password %>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
   </p>
   <p>
-    <%= f.label :salt %><br />
-    <%= f.text_field :salt %>
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
   </p>
   <p>
     <%= f.submit 'Update' %>
@@ -29,4 +29,3 @@
 <% end %>
 
 <%= link_to 'Show', @landlord %> |
-<%= link_to 'Back', landlords_path %>

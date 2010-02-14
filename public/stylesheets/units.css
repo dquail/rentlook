@@ -1,0 +1,70 @@
+/* 
+    Document   : units.css
+    Created on : Feb 8, 2010, 2:04:24 PM
+    Author     : dquail
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.unit
+{
+    padding:5px;
+    margin:20px;
+    background-color:#e0e6ea;
+    
+}
+.unit .title
+{
+    font-weight:bold;
+}
+.unit h1
+{
+    margin-top:1px;
+    margin-bottom:1px;
+}
+.unit h2
+{
+    margin:4px;
+}
+.unit h4
+{
+    margin:4px;
+}
+.unit .info
+{
+    margin: 10px;
+    float:left;
+}
+.unit .lease
+{
+    margin: 10px;
+    margin-left:20px;
+    float: left;
+}
+.unit .amenities
+{
+    margin:10px;
+    float: right;
+    font-style:italic;
+    text-align:right;
+}
+.unit .lease
+{
+    float: left;
+    margin: 10px;
+}
+.unit .clear
+{
+    clear:both;
+}
+.unit .actions
+{
+    margin:5px;
+    clear:both;
+    text-align: right;
+}

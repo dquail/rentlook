@@ -1,0 +1,90 @@
+<div class="application">
+  <h3>Application Status:</h3>
+  <%if @application.status=='N'%>
+    <h4>New</h4>
+  <%elsif @application.status=='A'%>
+    <h4>Approved</h4>
+  <%elsif @application.status=='R'%>
+    <h4>Rejected</h4>
+  <%end%>
+  <h2>Tenant Information</h2>
+  <h4><%=@application.tenant.firstname%> <%=@application.tenant.lastname%></h4>
+
+  <h4>Rental information</h4>
+  <h4>Unit: <%=@application.unit.name %></h4>
+  <h4>Term type: <%= @application.term_type %></h4>
+        
+  <h2>Application Costs</h2>
+  <h4>First month cost: <%=application.costs.first_month%></h4>
+  <h4>Security Deposit: <%=application.costs.security_deposit%></h4>
+  <h4>Credit Check: <%=application.costs.credit_check%></h4>
+  <h4>Other cost: <%=application.costs.other%></h4>
+
+  <h2>Rental History</h2>
+  <h3>Current Rental</h3>
+  <h4>Address: <%=application.rental_history.current_address%></h4>
+  <h4>Dates: <%=application.rental_history.current_date%></h4>
+  <h4>Reason for vacationg: <%=application.rental_history.current_vacate_reason%></h4>
+  <h4>Landlord name: <%=application.rental_history.current_landlord_name%></h4>
+  <h4>Landlord phone: <%=application.rental_history.current_landlord_phone%></h4>
+
+  <h3>Previous Rental</h3>
+  <h4>Address: <%=application.rental_history.previous_address%></h4>
+  <h4>Dates: <%=application.rental_history.previous_date%></h4>
+  <h4>Reason for vacationg: <%=application.rental_history.previous_vacate_reason%></h4>
+  <h4>Landlord name: <%=application.rental_history.previous_landlord_name%></h4>
+  <h4>Landlord phone: <%=application.rental_history.previous_landlord_phone%></h4>
+
+  <h3>Other Rental</h3>
+  <h4>Address: <%=application.rental_history.other_address%></h4>
+  <h4>Dates: <%=application.rental_history.other_date%></h4>
+  <h4>Reason for vacationg: <%=application.rental_history.other_vacate_reason%></h4>
+  <h4>Landlord name: <%=application.rental_history.other_landlord_name%></h4>
+  <h4>Landlord phone: <%=application.rental_history.other_landlord_phone%></h4>
+
+  <h2>Employment History</h2>
+  <h3>Current Employer</h3>
+  <h4>Company Name: <%=application.employment_history.current_name%></h4>
+  <h4>Address: <%=application.employment_history.current_address%></h4>
+  <h4>Your title: <%=application.employment_history.current_title%></h4>
+  <h4>Supervisor name: <%=application.employment_history.current_supervisor_name%></h4>
+  <h4>Supervisor phone: <%=application.employment_history.current_supervisor_phone%></h4>
+
+  <h3>Previous Employer</h3>
+  <h4>Company Name: <%=application.employment_history.previous_name%></h4>
+  <h4>Address: <%=application.employment_history.previous_address%></h4>
+  <h4>Your title: <%=application.employment_history.previous_title%></h4>
+  <h4>Supervisor name: <%=application.employment_history.previous_supervisor_name%></h4>
+  <h4>Supervisor phone: <%=application.employment_history.previous_supervisor_phone%></h4>
+
+  <h2>Income</h2>
+  <h4>Monthly Gross: <%=application.income.gross%></h4>
+  <h4>Monthly Other: <%=application.income.other%></h4>
+
+  <h2>Banking Info</h2>
+  <h4>Account number: <%=application.bank_info.savings_account%></h4>
+  <h4>Bank: <%=application.bank_info.savings_bank%></h4>
+  <h4>Branch: <%=application.bank_info.savings_branch%></h4>
+
+  <h2>Credit Information</h2>
+  <h4>Credit Type <%=application.credit_info.credit_type%></h4>
+  <h4>Account: <%=application.credit_info.credit_account%></h4>
+  <h4>Creditor: <%=application.credit_info.credit_name%></h4>
+  <h4>Amount owed: <%=application.credit_info.credit_owed%></h4>
+  <h4>Monthly payments: <%=application.credit_info.credit_payment%></h4>
+
+  <div class ="actions">
+  | <%= link_to "Approve application",
+          {:controller=>'applications',
+           :action=>'approve',
+           :id=>@application.id}, {:confirm => "Are you sure you'd like to approve the application?", :method=>:put}
+          %>  |
+  | <%= link_to "Reject application",
+          {:controller=>'applications',
+           :action=>'reject',
+           :id=>@application.id}, {:confirm => "Are you sure you'd like to reject the application?", :method=>:put}
+          %> |
+  | Final Action |
+
+  </div>
+</div>

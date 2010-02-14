@@ -1,0 +1,27 @@
+<div class="property">
+  <%if property.photo_file_name.nil?%>
+    <%= image_tag 'apartment.png'%>
+  <%else%>
+    <%= image_tag property.photo.url%>
+  <%end%>
+
+  <div class="address">
+    <h4>Name: <%=h property.name %></h4>
+    <h4>Address: <%=h property.address %></h4>
+    <h4>City: <%=h property.city %></h4>
+    <h4>State: <%=h property.state %></h4>
+    <h4>Zip: <%=h property.zip %></h4>
+    <h4>Country: <%=h property.country %></h4>
+  </div>
+  <div class ="info">
+    <h4>Units: <%=h property.units.count %></h4>
+    <h4>Deposit account: NA</h4>
+  </div>
+
+  <div class ="actions">
+  | <%= link_to 'Tenant/Unit Setup', property %>
+  | <%= link_to 'Edit', edit_property_path(property) %>
+  | <%= link_to 'Destroy', property, :confirm => 'Are you sure?', :method => :delete %> |
+
+  </div>
+</div>

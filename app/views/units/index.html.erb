@@ -1,0 +1,4 @@
+<%@properties.each do |property|%>
+  <div id="property_menu"><span class="title"><%=property.name%></span><span class="link"><%= link_to 'New unit', new_property_unit_path(property) %></span></div>
+  <%=render :partial=>"unit", :collection=>property.units%>
+<%end%>

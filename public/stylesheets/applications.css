@@ -1,0 +1,44 @@
+#application_menu
+{
+    border-bottom:black;
+    border-bottom-style:solid;
+    margin:10px;
+    margin-bottom:20px;
+}
+#application_menu .link
+{
+    vertical-align:bottom;
+    float:right;
+    text-align:right;
+}
+#application_menu .title
+{
+    font-size:18px;
+    text-align:left;
+}
+
+.application
+{
+    padding:5px;
+    margin:10px;
+    /*background-color:#cad2d8;*/
+}
+
+.application h4
+{
+    margin:4px;
+}
+
+.application .group
+{
+    background-color:#cad2d8;
+    margin:5px;
+    padding:5px;
+}
+
+.application .actions
+{
+    margin:5px;
+    clear:both;
+    text-align: right;
+}

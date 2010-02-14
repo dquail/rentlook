@@ -1,0 +1,29 @@
+<h1>Inviting a user User</h1>
+
+<% form_for(@new_user, :url => { :controller=>"new_user_instructions", :action => "create" }) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+  <%= f.label "New user will be a ... " %><br />
+  <%= f.radio_button :type, "Landlord" %>Landlord
+  <%= f.radio_button :type, "Tenant" %>Tenant
+  </p>
+
+
+  <p>
+    <%= f.label :firstname %><br />
+    <%= f.text_field :firstname %>
+  </p>
+  <p>
+    <%= f.label :lastname %><br />
+    <%= f.text_field :lastname %>
+  </p>
+
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>

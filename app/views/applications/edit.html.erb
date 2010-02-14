@@ -1,0 +1,33 @@
+<h1>Editing application</h1>
+
+<% form_for(@application) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :unit_id %><br />
+    <%= f.text_field :unit_id %>
+  </p>
+  <p>
+    <%= f.label :tenant_id %><br />
+    <%= f.text_field :tenant_id %>
+  </p>
+  <p>
+    <%= f.label :term_type %><br />
+    <%= f.text_field :term_type %>
+  </p>
+  <p>
+    <%= f.label :start_date %><br />
+    <%= f.date_select :start_date %>
+  </p>
+  <p>
+    <%= f.label :end_date %><br />
+    <%= f.date_select :end_date %>
+  </p>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @application %> |
+<%= link_to 'Other applications for unit', unit_applications_path(@application.unit) %>

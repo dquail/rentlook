@@ -1,0 +1,17 @@
+ben:
+  firstname: Ben
+  lastname: Millar
+  username: bmillar
+  email: bmillar@gmail.com
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test" + salt) %>
+  persistence_token: <%= Authlogic::Random.hex_token %>
+
+david:
+  firstname: David
+  lastname: Quail
+  username: dquail
+  email: david_quail@hotmail.com
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test" + salt) %>
+  persistence_token: <%= Authlogic::Random.hex_token %>

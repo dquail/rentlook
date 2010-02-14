@@ -1,5 +1,46 @@
 ActionController::Routing::Routes.draw do |map|
+  
+
+  map.login "login", :controller => "user_sessions", :action =>"new"
+  # TODO: Make the users controller handle both landlord and tenant create
+  #map.signup "signup", :controller => "users", :action =>"new"
+  map.signup "signup", :controller => "landlords", :action =>"new"
+  map.logout "logout", :controller => "user_sessions", :action =>"destroy"
+  # TODO: Make the account redirect to either landlord or tenant controller
+  map.account "account", :controller =>"users", :action =>"show"
+  #map.account "account", :controller =>"landlords", :action =>"show"
+
+  map.resources :occupancies
+  map.resources :listings
+  map.resources :user_sessions
+  map.resources :password_resets, :except => [:show]
+  map.resources :new_user_instructions
+  map.resources :user_verifications, :only => [:show]
+  map.resources :users
   map.resources :landlords
+  map.resources :tenants, :shallow=>true do |tenant|
+    tenant.resources :occupancies, :shallow =>true
+    tenant.resources :leases, :shallow => true
+  end
+  map.resources :properties, :shallow=>true do |property|
+      property.resources :units, :shallow=>true do |unit|
+        unit.resources :leases, :shallow =>true
+        unit.resources :occupancies, :shallow =>true
+        unit.resources :applications, :shallow =>true
+      end
+  end
+  map.resources :units, :only => [:index]
+
+  map.connect 'applications/approve/:id',
+          :controller => 'applications',
+          :action => "approve",
+          :conditions => { :method => :post }
+  map.connect 'applications/reject/:id',
+          :controller => 'applications',
+          :action => "reject",
+          :conditions => { :method => :post }
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -33,7 +74,7 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  # map.root :controller => "welcome"
+  map.root :controller => :users_sessions, :action=>:new
 
   # See how all your routes lay out with "rake routes"
 

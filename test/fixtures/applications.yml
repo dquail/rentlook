@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  unit_id: 1
+  tenant_id: 1
+  term_type: MyString
+  start_date: 2010-02-12
+  end_date: 2010-02-12
+  first_mont_due: 1
+
+two:
+  unit_id: 1
+  tenant_id: 1
+  term_type: MyString
+  start_date: 2010-02-12
+  end_date: 2010-02-12
+  first_mont_due: 1

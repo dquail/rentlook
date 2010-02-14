@@ -1,28 +1,7 @@
+<h2>Welcome <%=@user.firstname %> <%=@user.lastname %></h2>
 <p>
-  <b>Firstname:</b>
-  <%=h @landlord.firstname %>
+  You are registered with Rentlook as a Landlord.  You may login with your username: <%=@user.email %>
 </p>
 
-<p>
-  <b>Lastname:</b>
-  <%=h @landlord.lastname %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%=h @landlord.email %>
-</p>
-
-<p>
-  <b>Hashed password:</b>
-  <%=h @landlord.hashed_password %>
-</p>
-
-<p>
-  <b>Salt:</b>
-  <%=h @landlord.salt %>
-</p>
-
-
-<%= link_to 'Edit', edit_landlord_path(@landlord) %> |
-<%= link_to 'Back', landlords_path %>
+<%= link_to pluralize(@landlord.properties.size, 'property'), properties_path %>
+<%= link_to "Add property", new_property_path %>

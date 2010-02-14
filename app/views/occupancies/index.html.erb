@@ -1,0 +1,28 @@
+<h1>Listing occupancies</h1>
+
+<table>
+  <tr>
+    <th>Tenant</th>
+    <th>Unit</th>
+    <th>Status</th>
+    <th>Start date</th>
+    <th>End date</th>
+  </tr>
+
+<% @occupancies.each do |occupancy| %>
+  <tr>
+    <td><%=h occupancy.tenant_id %></td>
+    <td><%=h occupancy.unit_id %></td>
+    <td><%=h occupancy.status %></td>
+    <td><%=h occupancy.start_date %></td>
+    <td><%=h occupancy.end_date %></td>
+    <td><%= link_to 'Show', occupancy %></td>
+    <td><%= link_to 'Edit', edit_occupancy_path(occupancy) %></td>
+    <td><%= link_to 'Destroy', occupancy, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New occupancy', new_occupancy_path %>

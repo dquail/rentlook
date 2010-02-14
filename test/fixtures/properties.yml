@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+corbella:
+  manager: david
+  name: Corbella Suites
+  address: 9405 Ne 120St
+  city: Kirkland
+  state: WA
+  zip: 98034
+  country: USA
+
+trinity:
+  manager: david
+  name: Trinity Apts
+  address: 222 Commonwealth
+  city: Boston
+  state: MA
+  zip: 92282
+  country: USA

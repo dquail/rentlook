@@ -1,0 +1,14 @@
+<h1>Confirm my account Password</h1>
+
+<% form_tag new_user_instruction_url(@user.perishable_token), :method=>:put do %>
+
+  <%= hidden_field_tag 'id', @user.perishable_token%>
+
+  <label>Password: </label><br />
+  <%= password_field_tag :password %>  <br />
+
+  <label>Password confirmation: </label>  <br />
+  <%= password_field_tag :password_confirmation %><br />
+  <br />
+  <%= submit_tag "Confirm my account and log me in" %>
+<% end %>

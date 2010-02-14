@@ -1,0 +1,41 @@
+<h1>Editing unit</h1>
+
+<% form_for([@property,@unit]) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :bedrooms %><br />
+    <%= f.text_field :bedrooms %>
+  </p>
+  <p>
+    <%= f.label :bathrooms %><br />
+    <%= f.text_field :bathrooms %>
+  </p>
+  <p>
+    <%= f.label :square_feet %><br />
+    <%= f.text_field :square_feet %>
+  </p>
+  <p>
+    <%= f.label :base_rent %><br />
+    <%= f.text_field :base_rent %>
+  </p>
+  <p>
+    <%= f.label "Listed"%><br />
+    <%= f.check_box :listed %>
+  </p>
+
+  <p>
+    <%= f.label :amenities %><br />
+    <%= f.text_area :amenities %>
+  </p>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @unit %> |
+<%= link_to 'Back', property_units_path(@property) %>

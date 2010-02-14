@@ -1,0 +1,14 @@
+<p>
+  First Name:<br />
+  <%=@user.firstname %>
+</p>
+<p>
+  Last Name:<br />
+  <%=@user.lastname %>
+</p>
+<p>
+  Email:
+  <%=@user.email %>
+</p>
+<%= link_to pluralize(@user.properties.size, 'property'), properties_path %>
+<%= link_to "Add property", new_property_path %>

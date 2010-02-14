@@ -1,0 +1,20 @@
+<div class="lease">
+  <div class="tenant">
+    <h4>Tenant Name: <%=h lease.tenant.firstname%> <%=h lease.tenant.lastname%></h4>
+    <h4>Phone: <%=h lease.tenant.phone_number%></h4>
+    <h4>Email: <%=h lease.tenant.email%></h4>
+  </div>
+  <div class="info">
+    <h4>Lease start date: <%=h lease.start_date.to_s(:long) %></h4>
+    <h4>Lease end date: <%=h lease.end_date.to_s(:long) %></h4>
+    <h4>Monthly rent: <%=h lease.rent %> Due: <%=h lease.rent_due_date.ordinalize%> of month</h4>
+    <h4>Auto rent collect: <%=h lease.auto_collect %> </h4>
+    <h4>Auto increase: <%=h lease.auto_incriment%> Anual increase: <%=h lease.auto_incriment_pct%></h4>
+  </div>
+
+  <div class="actions">
+  | <%= link_to 'View Lease terms', lease %>
+  | <%= link_to 'Delete tenant', lease %>
+  | <%= link_to 'List unit', lease %> |
+  </div>
+</div>

@@ -1,0 +1,34 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+trinity_penthouse_one:
+  unit: trinity_penthouse
+  tenant_id: 1
+  start_date: 2010-02-04
+  end_date: 2011-02-04
+  rent: 2000
+  auto_collect: false
+  auto_incriment: false
+  auto_incriment_pct: 1
+  rent_due_date: 1
+
+corbella_bachelor_one:
+  unit: corbella_one
+  tenant_id: 1
+  start_date: 2010-01-01
+  end_date: 2011-01-01
+  rent: 950
+  auto_collect: false
+  auto_incriment: false
+  auto_incriment_pct: 1
+  rent_due_date: 1
+
+corbella_bachelor_two:
+  unit: corbella_one
+  tenant_id: 1
+  start_date: 2009-01-01
+  end_date: 2010-01-01
+  rent: 850
+  auto_collect: false
+  auto_incriment: false
+  auto_incriment_pct: 1
+  rent_due_date: 1

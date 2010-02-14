@@ -1,0 +1,32 @@
+<h1>Editing occupancy</h1>
+
+<% form_for(@occupancy) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :tenant_id %><br />
+    <%= f.text_field :tenant_id %>
+  </p>
+  <p>
+    <%= f.label :unit_id %><br />
+    <%= f.text_field :unit_id %>
+  </p>
+  <p>
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </p>
+  <p>
+    <%= f.label :start_date %><br />
+    <%= f.date_select :start_date %>
+  </p>
+  <p>
+    <%= f.label :end_date %><br />
+    <%= f.date_select :end_date %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @occupancy %> |
+<%= link_to 'Back', occupancies_path %>

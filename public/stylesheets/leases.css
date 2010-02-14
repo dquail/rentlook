@@ -1,0 +1,54 @@
+/*
+    Document   : units.css
+    Created on : Feb 8, 2010, 2:04:24 PM
+    Author     : dquail
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.lease
+{
+    padding:5px;
+    margin:20px;
+    background-color:#d2edfe;
+}
+.lease h1
+{
+    margin-top:1px;
+    margin-bottom:1px;
+}
+.lease h2
+{
+    margin:4px;
+}
+.lease h4
+{
+    margin:4px;
+}
+.lease .info
+{
+    margin: 10px;
+    float:left;
+}
+.lease .tenant
+{
+    margin: 10px;
+    margin-left:20px;
+    float: left;
+}
+
+.lease .clear
+{
+    clear:both;
+}
+.lease .actions
+{
+    margin:5px;
+    clear:both;
+    text-align: right;
+}

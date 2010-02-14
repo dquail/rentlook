@@ -1,0 +1,83 @@
+/* 
+    Document   : properties
+    Created on : Feb 8, 2010, 1:22:28 PM
+    Author     : dquail
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+#property_menu
+{
+    border-bottom:black;
+    border-bottom-style:solid;
+    margin:10px;
+    margin-bottom:20px;
+}
+#property_menu .link
+{
+    vertical-align:bottom;
+    float:right;
+    text-align:right;
+}
+#property_menu .title
+{
+    font-size:18px;
+    text-align:left;
+}
+#units_menu
+{
+    border-bottom:black;
+    border-bottom-style:solid;
+    margin:10px;
+    margin-bottom:20px;
+}
+#units_menu .link
+{
+    vertical-align:bottom;
+    float:right;
+    text-align:right;
+}
+#units_menu .title
+{
+    font-size:18px;
+    text-align:left;
+}
+#units
+{
+    margin-left:30px;
+}
+.property
+{
+    padding:5px;
+    margin:10px;
+    background-color:#cad2d8;
+}
+.property h4
+{
+    margin:4px;
+}
+.property img
+{
+    float:left;
+    margin: 5px;
+}
+.property .address
+{
+    margin: 10px;
+    float:left;
+}
+.property .info
+{
+    margin:10px;
+    float: right;
+}
+.property .actions
+{
+    margin:5px;
+    clear:both;
+    text-align: right;
+}

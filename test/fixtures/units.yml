@@ -1,0 +1,33 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+corbella_bachelor:
+  property: corbella
+  bedrooms: 1
+  bathrooms: 1
+  square_feet: 600
+  base_rent: 890
+  amenities: Top floor, view of the pool
+
+corbella_one:
+  property: corbella
+  bedrooms: 1
+  bathrooms: 1
+  square_feet: 1000
+  base_rent: 900
+  amenities: Nice one bedroom with view of the park.  Main floor.
+
+corbella_two:
+  property: corbella
+  bedrooms: 2
+  bathrooms: 2
+  square_feet: 1100
+  base_rent: 1020
+  amenities: Nice two bedroom with fireplace.  Rent reduction on this bad boy.
+
+trinity_penthouse:
+  property: trinity
+  bedrooms: 4
+  bathrooms: 2
+  square_feet: 2300
+  base_rent: 2600
+  amenities: Penthouse.  11 foot floor to ceiling windows.  View of downtown Boston.

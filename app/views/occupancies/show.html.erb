@@ -1,0 +1,28 @@
+<p>
+  <b>Tenant:</b>
+  <%=h @occupancy.tenant_id %>
+</p>
+
+<p>
+  <b>Unit:</b>
+  <%=h @occupancy.unit_id %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%=h @occupancy.status %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%=h @occupancy.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%=h @occupancy.end_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_occupancy_path(@occupancy) %> |
+<%= link_to 'Back', occupancies_path %>

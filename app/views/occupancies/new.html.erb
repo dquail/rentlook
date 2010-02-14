@@ -1,0 +1,42 @@
+<div class="rentlook_form">
+  <% form_for([@unit,@occupancy]) do |f| %>
+
+    <%= f.error_messages %>
+      <%=f.hidden_field :unit_id, :value =>@unit.id%>
+    <fieldset>
+      <legend>Occupancy details</legend>
+      <%=f.hidden_field :unit_id%>
+      <div><%=f.radio_button :status, "A", :checked=>true%>Active<br/></div>
+      <div><%=f.radio_button :status, "O"%>Archived<br/></div>
+      <div><%= f.label :start_date %><br/></div>
+      <div><%= f.date_select :start_date %><br/></div>
+
+      <div><%= f.label :end_date %><br/></div>
+      <div><%= f.date_select :end_date %></div>
+    </fieldset>
+    <br/>
+    <fieldset>
+      <legend>Tenant Details</legend>
+      <%=error_messages_for :tenant%>
+      <%fields_for :tenant do |tenant|%>
+        <div>
+          <%= tenant.label :firstname %><br />
+          <%=tenant.text_field :firstname %>
+        </div>
+        <div>
+          <%= tenant.label :firstname %><br />
+          <%=tenant.text_field :lastname %>
+        </div>
+        <div>
+          <%= tenant.label :email %><br />
+          <%=tenant.text_field :email %><br/>
+        </div>
+      <%end%>
+    </fieldset>
+    <p>
+      <%= f.submit 'Add tenant to this unit' %>
+    </p>
+  <% end %>
+
+  <%= link_to 'Back', occupancies_path %>
+</div>
