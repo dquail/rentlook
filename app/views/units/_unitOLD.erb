@@ -1,0 +1,64 @@
+<div class="unit">
+  <h1><%=h unit.name %></h1>
+  <div class="info">
+    <h4><span class="title">Bedrooms: </span><%=h unit.bedrooms %></h4>
+    <h4>Bathrooms: <%=h unit.bathrooms %></h4>
+    <h4>Square feet: <%=h unit.square_feet %></h4>
+    <h4>Base rent: <%=h unit.base_rent %></h4>
+    <h4>Current Status:</h4>
+    <h4>
+      <% if unit.rented %>
+        Rented
+      <% else %>
+        Vacant
+      <%end%>
+      <% if unit.listed %>
+        Listed
+      <%end%>
+    </h4>
+    <%if !unit.active_lease.nil?%>
+      <br/>
+      <h4>Current Lease: </h4>
+      <div id='<%='lease_' +unit.active_lease.id.to_s%>'>
+        <h4><%=unit.active_lease.tenant.firstname%> <%=unit.active_lease.tenant.lastname%>
+        from <%=unit.active_lease.start_date.to_s(:long)%> to <%=unit.active_lease.end_date.to_s(:long)%></h4>
+        <h4><%= link_to_remote 'View lease details',
+                                :method=>:get,
+                                :url=>unit.leases[0],
+                                :update=>'lease_'+unit.leases[0].id.to_s%></h4>
+      </div>
+    <%end%>
+    <%if !unit.current_occupancies.nil?%>
+      <br/>
+      <h4>Current Occupants: </h4>
+      <div id='<%='unit_' +unit.id.to_s + '_occupants'%>'>
+        <%unit.current_occupancies.each do |current_occupancy|%>
+          <h4><%=current_occupancy.tenant.firstname%> <%=current_occupancy.tenant.lastname%></h4>
+        <%end%>
+      </div>
+    <%end%>
+    <%if !unit.applications.nil?%>
+      <br/>
+      <h4>Applications: </h4>
+      <div id='<%='unit_' +unit.id.to_s + '_applications'%>'>
+        <%unit.applications.each do |application|%>
+          <h4> <%=  application.tenant.firstname%> <%=application.tenant.lastname %> <%=application.status %>
+           | <%= link_to 'View application', application %> | <%= link_to 'Delete application', application, :confirm => 'Are you sure?', :method=>:delete %> |
+          </h4>
+        <%end%>
+      </div>
+    <%end%>
+  </div>
+
+  <div class="amenities">
+    <h4>Description: <br/><%=h unit.amenities %></h4>
+  </div>
+  <div class="actions">
+  | <%= link_to 'View lease history', unit_leases_path(unit) %>
+  | <%= link_to 'Create lease', new_unit_lease_path(unit) %>
+  | <%= link_to 'View occupant history', unit_occupancies_path(unit) %>
+  | <%= link_to 'Add occupant', new_unit_occupancy_path(unit) %>
+  | <%= link_to 'Edit unit', edit_unit_path(unit) %>
+  | <%= link_to 'Delete unit', unit, :confirm => 'Are you sure?', :method => :delete %> |
+  </div>
+</div>

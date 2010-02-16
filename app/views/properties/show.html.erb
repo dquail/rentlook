@@ -1,6 +1,8 @@
 <div id="property_menu"><span class="title"><%=@property.name%></span><span class="link"><%= link_to 'New property', new_property_path %></span></div>
 <%=render :partial=>"property"%>
-<div id="units_menu"><span class="title">Unit listings</span><span class="link"><%= link_to 'New unit', new_property_unit_path(@property) %></span></div>
+<div id="units_menu"><span class="title">Unit / Tenant Setup</span><span class="link"><%= link_to 'New unit', new_property_unit_path(@property) %></span></div>
 <div id="units">
-  <%=render :partial=>"units/unit", :collection=>@property.units %>
+  <%@property.units.each do |unit|%>
+  <%=render :partial=>"units/unitTenant", :locals=>{:unit=>unit} %>
+  <%end%>
 </div>

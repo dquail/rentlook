@@ -46,6 +46,10 @@
     margin-left:20px;
     float: left;
 }
+.unit .occupants
+{
+    margin: 10px;
+}
 .unit .amenities
 {
     margin:10px;

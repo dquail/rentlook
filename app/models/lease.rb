@@ -1,8 +1,8 @@
 class Lease < ActiveRecord::Base
-  validates_presence_of :start_date, :unit_id
-  validates_numericality_of :rent, :auto_incriment_pct, :rent_due_date
-  validate :rent_due_date_validation
-  validate :no_lease_within_new_lease
+  #validates_presence_of :start_date, :unit_id
+  #validates_numericality_of :rent, :auto_incriment_pct, :rent_due_date
+  #validate :rent_due_date_validation
+  #validate :no_lease_within_new_lease
   
   belongs_to :unit
   belongs_to :tenant, :class_name=> "Tenant", :foreign_key =>"tenant_id"

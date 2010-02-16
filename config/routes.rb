@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login "login", :controller => "user_sessions", :action =>"new"
   # TODO: Make the users controller handle both landlord and tenant create
   #map.signup "signup", :controller => "users", :action =>"new"
-  map.signup "signup", :controller => "landlords", :action =>"new"
+  map.signup "signup", :controller => "users", :action =>"new"
   map.logout "logout", :controller => "user_sessions", :action =>"destroy"
   # TODO: Make the account redirect to either landlord or tenant controller
   map.account "account", :controller =>"users", :action =>"show"
@@ -40,7 +40,10 @@ ActionController::Routing::Routes.draw do |map|
           :action => "reject",
           :conditions => { :method => :post }
 
-
+  map.connect 'units/create_application/:id',
+          :controller =>'units',
+          :action => "create_application",
+          :conditions=>{:method=>:put}
 
   # The priority is based upon order of creation: first created -> highest priority.
 

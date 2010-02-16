@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100214040107) do
+ActiveRecord::Schema.define(:version => 20100216024537) do
 
   create_table "applications", :force => true do |t|
     t.integer  "unit_id"
@@ -70,13 +70,15 @@ ActiveRecord::Schema.define(:version => 20100214040107) do
     t.integer  "tenant_id"
     t.date     "start_date"
     t.date     "end_date"
-    t.integer  "rent"
-    t.boolean  "auto_collect"
-    t.boolean  "auto_incriment"
-    t.integer  "auto_incriment_pct"
-    t.integer  "rent_due_date"
+    t.integer  "rent",               :default => 1000
+    t.boolean  "auto_collect",       :default => false
+    t.boolean  "auto_incriment",     :default => false
+    t.integer  "auto_incriment_pct", :default => 0
+    t.integer  "rent_due_date",      :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "landlord_approved",  :default => true
+    t.boolean  "tenant_approved",    :default => false
   end
 
   create_table "occupancies", :force => true do |t|

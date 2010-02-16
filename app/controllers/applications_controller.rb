@@ -103,14 +103,28 @@ class ApplicationsController < ApplicationController
   def approve
     @application = Application.find(params[:id])
     @application.status = 'A'
+    @lease = Lease.new()
+    @lease.unit = @application.unit
+    @lease.start_date = @application.start_date
+    @lease.end_date = @application.end_date
+    @lease.tenant = @application.tenant
+
+
     respond_to do |format|
-      if @application.save
-        flash[:notice] = 'Application was successfully approved.'
-        format.html { redirect_to(@application) }
-        format.xml  { head :ok }
-      else
-        flash[:notice] = 'Error approving the application
-        format.html { redirect_to(@application) }'
+      Lease.transaction do
+        if @application.save
+          if @lease.save
+            flash[:notice] = 'Application was successfully approved.'
+            format.html { redirect_to(@lease.unit) }
+            format.xml  { head :ok }
+          else
+            flash[:notice] = 'Error generating the lease for the application.'
+            format.html { render :controller=>"leases", :action => "edit" }
+          end
+        else
+          flash[:notice] = 'Error approving the application
+          format.html { redirect_to(@application) }'
+        end
       end
     end
   end

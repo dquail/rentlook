@@ -82,6 +82,9 @@ class LeasesController < ApplicationController
 
     respond_to do |format|
       if @lease.update_attributes(params[:lease])
+        if @lease.landlord_approved && @lease.tenant_approved
+          @lease.unit.update_attribute(:rented, true)
+        end
         flash[:notice] = 'Lease was successfully updated.'
         format.html { redirect_to(@lease) }
         format.xml  { head :ok }

@@ -98,5 +98,41 @@ class UnitsController < ApplicationController
     end
   end
 
+  def new_application
+    @unit = Unit.find(params[:id])
+    @application = @unit.applications.new()
+    respond_to do |format|
+      format.html # send_application.html.erb
+      format.xml  { render :xml => @unit }
+    end
+  end
+  
+  def create_application
+    @unit = Unit.find(params[:id])
+    @application = @unit.applications.new(params[:application])
+    @application.costs = ApplicationCosts.create(params[:application_costs])
+    
+    @applier = Tenant.new(params[:tenant])
+    @tenant = Tenant.find_by_email(@applier.email)
+    if @tenant
+      @application.tenant = @tenant
+    else
+      @tenant = Tenant.create_with_perishable_token(@applier)
+    end
 
+    respond_to do |format|
+      Tenant.transaction do
+        @tenant.save
+        @application.tenant=@tenant
+        if @application.save
+          #Send email to user with link to application
+          flash[:notice] = 'Application was created successfully for user.'
+          format.html { redirect_to @unit }
+        else
+          flash[:error] = 'Application error when creating'
+          format.html { redirect_to @unit }
+        end
+      end
+    end
+  end
 end

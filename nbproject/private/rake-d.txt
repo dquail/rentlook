@@ -41,6 +41,7 @@ doc\:clobber_plugins=Remove plugin documentation
 doc\:clobber_rails=Remove rdoc products
 doc\:guides=Generate Rails guides
 doc\:plugins=Generate documentation for all installed plugins
+doc\:plugins\:authlogic=Generate documentation for the authlogic plugin
 doc\:plugins\:irs_process_scripts=Generate documentation for the irs_process_scripts plugin
 doc\:plugins\:paperclip=Generate documentation for the paperclip plugin
 doc\:rails=Build the rails HTML Files

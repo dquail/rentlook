@@ -1,0 +1,7 @@
+<div class="actions">
+| <%= link_to 'View and approve lease terms', lease %>
+<%if !lease.landlord_approved?%>
+| <%= link_to 'Approve lease', edit_lease_url(lease) %>
+<%end%>
+
+</div>

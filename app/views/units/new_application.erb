@@ -1,0 +1,87 @@
+<h3>Send someone an application to rent your unit.<%=@unit.name%> at <%=@unit.property.address%></h3>
+<h4>Simply fill in the information below and the potential tenant will receive an application
+via email</h4>
+
+<div class="rentlook_form">
+  <% form_for([@unit, @application], :url=> {:action =>"create_application"}) do |f| %>
+
+    <%= f.error_messages %>
+      <%=f.hidden_field :id, :value =>@unit.id%>
+
+    <fieldset>
+      <legend>Tenant Details</legend>
+      <%=error_messages_for :tenant%>
+      <%fields_for :tenant do |tenant|%>
+        <div><%=tenant.label :firstname%></div>
+        <div><%=tenant.text_field :firstname%></div>
+        <div><%=tenant.label :lastname%></div>
+        <div><%=tenant.text_field :lastname%></div>
+
+        <div><%= tenant.label :email %></div>
+        <div><%=tenant.text_field :email %></div><br/>
+      <%end%>
+    </fieldset>
+    <br/>
+    <fieldset>
+      <legend>Enter the application details</legend>
+      <div>
+        <%= f.label :term_type %>
+        <%= f.text_field :term_type %>
+      </div>
+      <div>
+        <%= f.label :start_date %>
+        <%= f.date_select :start_date %>
+      </div>
+      <div>
+        <%= f.label :end_date %>
+        <%= f.date_select :end_date %>
+      </div>
+    </fieldset><br/>
+    <%  fields_for @application.costs do |subform|%>
+      <fieldset>
+        <legend>Rental costs</legend>
+        <div>
+          <%= subform.label :first_month %>
+          <%= subform.text_field :first_month %>
+        </div>
+        <div>
+          <%= subform.label :security_deposit %>
+          <%= subform.text_field :security_deposit %>
+        </div>
+        <div>
+          <%= subform.label :credit_check %>
+          <%= subform.text_field :credit_check %>
+        </div>
+        <div>
+          <%= subform.label :other %>
+          <%= subform.text_field :other %>
+        </div>
+      </fieldset>
+    <%  end %>
+    <br/>
+    </fieldset>
+
+    <fieldset>
+      <legend>Change any of the details about the unit</legend>
+      <%fields_for :unit do |unit|%>
+        <%=f.hidden_field :id%>
+        <div><%=unit.label :bedrooms%></div>
+        <div><%=unit.text_field :bedrooms%></div>
+        <div><%=unit.label :square_feet%></div>
+        <div><%=unit.text_field :square_feet%></div>
+        <div><%=unit.label :base_rent%></div>
+        <div><%=unit.text_field :base_rent%></div>
+        <div><%=unit.label :bathrooms%></div>
+        <div><%=unit.text_field :bathrooms%></div>
+        <div><%=unit.label :amenities%></div>
+        <div><%=unit.text_area :amenities%></div>
+      <%end%>
+    </fieldset>
+    <br/>
+    <p>
+      <%= f.submit 'Send tenant an application form' %>
+    </p>
+  <% end %>
+
+  <%= link_to 'Back', @unit %>
+</div>

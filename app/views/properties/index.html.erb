@@ -1,2 +1,7 @@
 <div id="property_menu"><span class="title">My Properties</span><span class="link"><%= link_to 'New property', new_property_path %></span></div>
-<%= render(:partial=>"property", :collection=>@properties) %>
+
+<%@properties.each do |property|%>
+  <%= render(:partial =>"property", :object=>property) %>
+  <%= render(:partial =>"propertyMenu", :locals=>{:property=>property}) %>
+<%end%>
+

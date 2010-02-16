@@ -75,9 +75,14 @@
     margin:10px;
     float: right;
 }
-.property .actions
+.actions
 {
     margin:5px;
+    margin-bottom:25px;
     clear:both;
     text-align: right;
+}
+.clear
+{
+    clear:both;
 }

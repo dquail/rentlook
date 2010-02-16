@@ -1,0 +1,66 @@
+<div class="unit">
+  <h1><%=h unit.name %></h1>
+  <div class="status">
+    <h4>Current Status:
+      <% if unit.rented %>
+        Rented
+      <% else %>
+        Vacant
+      <%end%>
+      <% if unit.listed %>
+        Listed
+      <%end%>
+    </h4>
+  </div>
+  <div id ="lease">
+    <h4>Current Lease:</h4>
+    <%if !unit.active_lease.nil?%>
+      <br/>
+      <h4>Current Lease: </h4>
+      <div id='<%='lease_' +unit.active_lease.id.to_s%>'>
+        <%=render :partial=>"leases/lease", :object=>unit.active_lease%>
+        
+        <%=render :partial=>"leases/leaseMenu", :locals=>{:lease=>unit.active_lease}%>
+      </div>
+    <%end%>
+  </div>
+  <div class="clear"></div>
+  <div id ="occupants">
+    <%if !unit.current_occupancies.nil?%>
+      <br/>
+      <h4>Current Occupants: </h4>
+      <div id='<%='unit_' +unit.id.to_s + '_occupants'%>'>
+        <%unit.current_occupancies.each do |current_occupancy|%>
+          <h4><%=current_occupancy.tenant.firstname%> <%=current_occupancy.tenant.lastname%></h4>
+        <%end%>
+      </div>
+    <%end%>
+  </div>
+  <div id ="applications">
+    <%if !unit.applications.nil?%>
+      <br/>
+      <h4>Applications: </h4>
+      <div id='<%='unit_' +unit.id.to_s + '_applications'%>'>
+        <%unit.applications.each do |application|%>
+          <h4> <%=  application.tenant.firstname%> <%=application.tenant.lastname %> <%=application.status %>
+           | <%= link_to 'View application', application %> | <%= link_to 'Delete application', application, :confirm => 'Are you sure?', :method=>:delete %> |
+          </h4>
+        <%end%>
+      </div>
+    <%end%>
+  </div>
+
+  <div class="actions">
+  <% if !unit.rented? %>
+  | Upload existing lease |
+  | <%= link_to 'Send lease application', :controller=>"units", :action=>"new_application", :id=>unit %>
+  <%else%>
+  | <%= link_to 'Add occupant', new_unit_occupancy_path(unit) %>
+  <%end%>
+  <% if !unit.listed? %>
+    | List unit |
+  <%else%>
+    | Remove listing |
+  <%end%>
+  </div>
+</div>

@@ -4,14 +4,6 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :manager_id %><br />
-    <%= f.text_field :manager_id %>
-  </p>
-  <p>
-    <%= f.label :tenant_id %><br />
-    <%= f.text_field :tenant_id %>
-  </p>
-  <p>
     <%= f.label :start_date %><br />
     <%= f.date_select :start_date %>
   </p>
@@ -40,9 +32,15 @@
     <%= f.text_field :rent_due_date %>
   </p>
   <p>
+    <%= f.label "Landlord Approved"%><br />
+    <%= f.check_box :landlord_approved %>
+  </p>
+  <p>
+    <%= f.label "Tenant Approved"%><br />
+    <%= f.check_box :tenant_approved %>
+  </p>
+  <p>
     <%= f.submit 'Update' %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @lease %> |
-<%= link_to 'Back', unit_leases_path %>

@@ -8,6 +8,7 @@ class Property < ActiveRecord::Base
   validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
   belongs_to :landlord
   has_many :units
+  has_many :applications, :through=>:units
   has_attached_file :photo,
                   :url => "/assets/properties/:id/:style/:basename.:extension",
                   :path => ":rails_root/public/assets/properties/:id/:style/:basename.:extension"
