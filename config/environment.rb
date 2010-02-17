@@ -22,16 +22,24 @@ Rails::Initializer.run do |config|
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
-  config.gem "authlogic"
+    config.gem "authlogic"
+#
+#ActionMailer::Base.delivery_method = :sendmail
+#ActionMailer::Base.perform_deliveries = true
+#ActionMailer::Base.raise_delivery_errors = true
+#ActionMailer::Base.default_charset = "utf-8"
+#ActionMailer::Base.default_content_type = "text/html"
 
-  config.action_mailer.smtp_settings = {
-    :address => "mail.rentlook.com",
-    :port => 26,
-    :domain => "mail.rentlook.com",
-    :authentication => "login",
-    :user_name => "accounts@rentlook.com",
-    :password => "!Build#"
-  }
+  config.action_mailer.delivery_method=:sendmail
+  
+#  config.action_mailer.smtp_settings = {
+#    :address => "mail.rentlook.com",
+#    :port => 26,
+#    :domain => "mail.rentlook.com",
+#    :authentication => "login",
+#    :user_name => "accounts@rentlook.com",
+#    :password => "!Build#"
+#  }
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]

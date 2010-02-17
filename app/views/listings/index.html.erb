@@ -1,3 +1,7 @@
 <h1>Available Listings</h1>
-<%=render :partial=>"units/unit", :collection=>@units %>
+<%@units.each do |unit|%>
+<%=render :partial=>"units/unit", :object=>unit %>
+<%= link_to 'Apply', new_unit_application_url(unit) %>
+<%end%>
+
 

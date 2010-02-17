@@ -12,9 +12,12 @@ class Unit < ActiveRecord::Base
 
   belongs_to :property
   has_many :leases
-  has_one :active_lease,
-          :class_name => 'Lease',
-          :conditions => "start_date <= '#{DateTime.now}' AND end_date > '#{DateTime.now}'"
+#  has_one :active_lease,
+#          :class_name => 'Lease',
+#          :conditions => "start_date <= '#{DateTime.now}' AND end_date > '#{DateTime.now}'"
+#  has_one :active_lease,
+#          :class_name => 'Lease',
+#          :conditions => "landlord_approved= true AND tenant_approved=true"
 
 
 protected

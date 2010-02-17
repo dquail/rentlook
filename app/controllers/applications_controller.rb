@@ -30,7 +30,9 @@ class ApplicationsController < ApplicationController
   def new
     find_unit
     @application = @unit.applications.new
-
+    if @user.class == Tenant
+      @application.tenant = @user
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @application }
@@ -73,13 +75,29 @@ class ApplicationsController < ApplicationController
   # PUT /applications/1.xml
   def update
     @application = Application.find(params[:id])
+    @application.costs = ApplicationCosts.create(params[:application_costs])
+    @application.bank_info = ApplicationBankInfo.create(params[:application_bank_info])
+    @application.credit_info = ApplicationCreditInfo.create(params[:application_credit_info])
+    @application.employment_history = EmploymentHistory.create(params[:employment_history])
+    @application.income = Income.create(params[:income])
+    @application.rental_history = RentalHistory.create(params[:rental_history])
+    if @user.class == Tenant
+      @application.tenant = @user
+    end
 
     respond_to do |format|
       if @application.update_attributes(params[:application])
-        flash[:notice] = 'Application was successfully updated.'
-        format.html { redirect_to(@application) }
-        format.xml  { head :ok }
+        if @application.save
+          flash[:notice] = 'Application was successfully updated.'
+          format.html { redirect_to(@application) }
+          format.xml  { head :ok }
+        else
+          flash[:error] = 'Application failed to update.'
+          format.html { render :action => "edit" }
+          format.xml  { render :xml => @application.errors, :status => :unprocessable_entity }
+        end
       else
+        flash[:error] = 'Application failed to update.'
         format.html { render :action => "edit" }
         format.xml  { render :xml => @application.errors, :status => :unprocessable_entity }
       end
@@ -108,12 +126,21 @@ class ApplicationsController < ApplicationController
     @lease.start_date = @application.start_date
     @lease.end_date = @application.end_date
     @lease.tenant = @application.tenant
-
+    if current_user.class==Landlord
+      @lease.landlord_approved=true
+    elsif current_user.class==Tenant
+      @lease.tennant_approved=true
+    end
 
     respond_to do |format|
       Lease.transaction do
         if @application.save
           if @lease.save
+            if current_user.class==Landlord
+              AccountMailer.deliver_lease_for_unit(@lease.tenant, current_user, @lease)
+            elsif current_user.class==Tenant
+              AccountMailer.deliver_lease_for_unit(@lease.unit.property.landlord, current_user, @lease)
+            end
             flash[:notice] = 'Application was successfully approved.'
             format.html { redirect_to(@lease.unit) }
             format.xml  { head :ok }

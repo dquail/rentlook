@@ -55,9 +55,8 @@ class UsersController < ApplicationController
       if @user.save
         flash[:notice] = "Thanks for signing up, we've delivered an email to you with instructions on how to complete your registration!"
         @user.deliver_verification_instructions!
-        redirect_to "index.html"
 
-        format.html { redirect_to account_url }
+        format.html { redirect_to login_url }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }

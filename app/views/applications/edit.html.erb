@@ -1,33 +1,252 @@
-<h1>Editing application</h1>
+<h2>Editing your application for unit rental</h2>
 
-<% form_for(@application) do |f| %>
-  <%= f.error_messages %>
+<div class="rentlook_form">
+  <% form_for([@unit,@application]) do |f| %>
+    <%= f.error_messages %>
+    <fieldset>
+      <legend>Tenant Information</legend>
+      <div>
+        <%= f.label :tenant_id %>
+        <%= f.text_field :tenant_id %>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Rental information</legend>
+      <div>
+        <%= f.label :unit_id %>
+        <%= f.text_field :unit_id %>
+      </div>
+      <div>
+        <%= f.label :tenant_id %>
+        <%= f.text_field :tenant_id %>
+      </div>
+      <div>
+        <%= f.label :term_type %>
+        <%= f.text_field :term_type %>
+      </div>
+      <div>
+        <%= f.label :start_date %>
+        <%= f.date_select :start_date %>
+      </div>
+      <div>
+        <%= f.label :end_date %>
+        <%= f.date_select :end_date %>
+      </div>
+    </fieldset><br/>
+    <%  fields_for @application.costs do |subform|%>
+      <fieldset>
+        <legend>Rental costs</legend>
+        <div>
+          <%= subform.label :first_month %>
+          <%= subform.text_field :first_month %>
+        </div>
+        <div>
+          <%= subform.label :security_deposit %>
+          <%= subform.text_field :security_deposit %>
+        </div>
+        <div>
+          <%= subform.label :credit_check %>
+          <%= subform.text_field :credit_check %>
+        </div>
+        <div>
+          <%= subform.label :other %>
+          <%= subform.text_field :other %>
+        </div>
+      </fieldset>
+    <%  end %>
+    <br/>
 
-  <p>
-    <%= f.label :unit_id %><br />
-    <%= f.text_field :unit_id %>
-  </p>
-  <p>
-    <%= f.label :tenant_id %><br />
-    <%= f.text_field :tenant_id %>
-  </p>
-  <p>
-    <%= f.label :term_type %><br />
-    <%= f.text_field :term_type %>
-  </p>
-  <p>
-    <%= f.label :start_date %><br />
-    <%= f.date_select :start_date %>
-  </p>
-  <p>
-    <%= f.label :end_date %><br />
-    <%= f.date_select :end_date %>
-  </p>
+    <%  fields_for @application.rental_history do |subform|%>
+      <fieldset>
+        <legend>Rental history</legend>
+        <div class="subtitle">Current Rental</div>
+        <div>
+          <%= subform.label "Address" %>
+          <%= subform.text_field :current_address %>
+        </div>
+        <div>
+          <%= subform.label "Dates rented" %>
+          <%= subform.text_field :current_date %>
+        </div>
+        <div>
+          <%= subform.label "Reason for vacating" %>
+          <%= subform.text_field :current_vacate_reason %>
+        </div>
+        <div>
+          <%= subform.label "Landlord name" %>
+          <%= subform.text_field :current_landlord_name %>
+        </div>
+        <div>
+          <%= subform.label "Landlord phone" %>
+          <%= subform.text_field :current_landlord_phone %>
+        </div>
+        <div class="subtitle">Previous Rental</div>
+        <div>
+          <%= subform.label "Address" %>
+          <%= subform.text_field :previous_address %>
+        </div>
+        <div>
+          <%= subform.label "Dates rented" %>
+          <%= subform.text_field :previous_date %>
+        </div>
+        <div>
+          <%= subform.label "Reason for vacating" %>
+          <%= subform.text_field :previous_vacate_reason %>
+        </div>
+        <div>
+          <%= subform.label "Landlord name" %>
+          <%= subform.text_field :previous_landlord_name %>
+        </div>
+        <div>
+          <%= subform.label "Landlord phone" %>
+          <%= subform.text_field :previous_landlord_phone %>
+        </div>
 
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
+        <div class="subtitle">Other rental</div>
+        <div>
+          <%= subform.label "Address" %>
+          <%= subform.text_field :other_address %>
+        </div>
+        <div>
+          <%= subform.label "Dates rented" %>
+          <%= subform.text_field :other_date %>
+        </div>
+        <div>
+          <%= subform.label "Reason for vacating" %>
+          <%= subform.text_field :other_vacate_reason %>
+        </div>
+        <div>
+          <%= subform.label "Landlord name" %>
+          <%= subform.text_field :other_landlord_name %>
+        </div>
+        <div>
+          <%= subform.label "Landlord phone" %>
+          <%= subform.text_field :other_landlord_phone %>
+        </div>
+      </fieldset>
+    <%  end %>
+    <br/>
+
+    <%  fields_for @application.employment_history do |subform|%>
+      <fieldset>
+        <legend>Employment History</legend>
+        <div class="subtitle">Current Employer info</div>
+        <div>
+          <%= subform.label "Name"%>
+          <%= subform.text_field :current_name %>
+        </div>
+        <div>
+          <%= subform.label "Address" %>
+          <%= subform.text_field :current_address %>
+        </div>
+        <div>
+          <%= subform.label "Your title" %>
+          <%= subform.text_field :current_title %>
+        </div>
+        <div>
+          <%= subform.label "Supervisor name" %>
+          <%= subform.text_field :current_supervisor_name %>
+        </div>
+        <div>
+          <%= subform.label "Supervisor phone" %>
+          <%= subform.text_field :current_supervisor_phone %>
+        </div>
+
+        <div class="subtitle">Previous Employer info</div>
+        <div>
+          <%= subform.label "Name"%>
+          <%= subform.text_field :previous_name %>
+        </div>
+        <div>
+          <%= subform.label "Address" %>
+          <%= subform.text_field :previous_address %>
+        </div>
+        <div>
+          <%= subform.label "Your title" %>
+          <%= subform.text_field :previous_title %>
+        </div>
+        <div>
+          <%= subform.label "Supervisor name" %>
+          <%= subform.text_field :previous_supervisor_name %>
+        </div>
+        <div>
+          <%= subform.label "Supervisor phone" %>
+          <%= subform.text_field :previous_supervisor_phone %>
+        </div>
+
+      </fieldset>
+      <br/>
+
+     <%  fields_for @application.income do |subform|%>
+      <fieldset>
+        <legend>Income information</legend>
+        <div>
+          <%= subform.label "Monthly Gross" %>
+          <%= subform.text_field :gross %>
+        </div>
+        <div>
+          <%= subform.label "Other monthly income" %>
+          <%= subform.text_field :other %>
+        </div>
+      </fieldset>
+    <%  end %>
+    <br/>
+
+     <%  fields_for @application.bank_info do |subform|%>
+      <fieldset>
+        <legend>Bank information</legend>
+        <div>
+          <%= subform.label :savings_account %>
+          <%= subform.text_field :savings_account %>
+        </div>
+        <div>
+          <%= subform.label :savings_bank %>
+          <%= subform.text_field :savings_bank %>
+        </div>
+        <div>
+          <%= subform.label :savings_branch %>
+          <%= subform.text_field :savings_branch %>
+        </div>
+      </fieldset>
+    <%  end %>
+    <br/>
+
+    <%  fields_for @application.credit_info do |subform|%>
+      <fieldset>
+        <legend>Credit information</legend>
+        <div>
+          <%= subform.label "Credit type Visa, etc" %>
+          <%= subform.text_field :credit_type %>
+        </div>
+        <div>
+          <%= subform.label :credit_account %>
+          <%= subform.text_field :credit_account %>
+        </div>
+        <div>
+          <%= subform.label "Creditor - Bank etc" %>
+          <%= subform.text_field :credit_name %>
+        </div>
+        <div>
+          <%= subform.label :credit_owed %>
+          <%= subform.text_field :credit_owed %>
+        </div>
+        <div>
+          <%= subform.label :loan_owed %>
+          <%= subform.text_field :loan_payment %>
+        </div>
+      </fieldset>
+    <%  end %>
+    <br/>
+
+    <%  end %>
+    <br/>
+
+    <div>
+      <%= f.submit 'Submit my application' %>
+    </div>
+
+  <% end %>
+</div>
 
 <%= link_to 'Show', @application %> |
 <%= link_to 'Other applications for unit', unit_applications_path(@application.unit) %>

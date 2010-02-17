@@ -25,4 +25,5 @@ class User < ActiveRecord::Base
     reset_perishable_token!
     AccountMailer.deliver_new_user_instructions(self, inviting_user)
   end
+
 end

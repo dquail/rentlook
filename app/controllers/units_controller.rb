@@ -56,7 +56,7 @@ class UnitsController < ApplicationController
   def create
     @property = @user.properties.find(params[:property_id])
     @unit = @property.units.new(params[:unit])
-    @unit.statuses << Status.find_by_status('Vacant')
+    
     respond_to do |format|
       if @unit.save
         flash[:notice] = 'Unit was successfully created.'
@@ -78,9 +78,11 @@ class UnitsController < ApplicationController
       if @unit.update_attributes(params[:unit])
         flash[:notice] = 'Unit was successfully updated.'
         format.html { redirect_to(@unit) }
+        format.js {render :partial=>"unitTenant", :locals=>{:unit=>@unit}}
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
+        format.js {render :partial => @unit}
         format.xml  { render :xml => @unit.errors, :status => :unprocessable_entity }
       end
     end
@@ -125,7 +127,7 @@ class UnitsController < ApplicationController
         @tenant.save
         @application.tenant=@tenant
         if @application.save
-          #Send email to user with link to application
+          AccountMailer.deliver_application_for_unit(@tenant, current_user, @application)
           flash[:notice] = 'Application was created successfully for user.'
           format.html { redirect_to @unit }
         else

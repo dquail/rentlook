@@ -31,14 +31,25 @@
     <%= f.label :rent_due_date %><br />
     <%= f.text_field :rent_due_date %>
   </p>
-  <p>
-    <%= f.label "Landlord Approved"%><br />
-    <%= f.check_box :landlord_approved %>
-  </p>
-  <p>
-    <%= f.label "Tenant Approved"%><br />
-    <%= f.check_box :tenant_approved %>
-  </p>
+  <%if current_user.class == Tenant%>
+    <p>
+      <%= f.label "Tenant Approved"%><br />
+      <%= f.check_box :tenant_approved %>
+    </p>
+    <p>
+      <%= f.label "Landlord Approved:"%> <%=@lease.landlord_approved%><br />
+    </p>
+  <%elsif current_user.class ==Landlord%>
+    <p>
+      <%= f.label "Landlord Approved"%><br />
+      <%= f.check_box :landlord_approved %>
+    </p>
+    <p>
+      <%= f.label "Tenant Approved:"%> <%=@lease.tenant_approved%><br />
+    </p>
+  <%end%>
+
+
   <p>
     <%= f.submit 'Update' %>
   </p>

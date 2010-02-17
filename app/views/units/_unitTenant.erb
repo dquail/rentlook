@@ -1,26 +1,30 @@
-<div class="unit">
+<div id='<%='unit_' +unit.id.to_s%>' class="unit">
   <h1><%=h unit.name %></h1>
   <div class="status">
     <h4>Current Status:
-      <% if unit.rented %>
-        Rented
-      <% else %>
-        Vacant
-      <%end%>
-      <% if unit.listed %>
-        Listed
-      <%end%>
+      <div id='<%='rented_' +unit.id.to_s%>'>
+        <% if unit.rented %>
+          Rented
+        <% else %>
+          Vacant
+        <%end%>
+      </div>
+      <div id='<%='listed_' +unit.id.to_s%>'>
+        <% if unit.listed %>
+          Listed
+        <%end%>
+      </div>
     </h4>
   </div>
   <div id ="lease">
     <h4>Current Lease:</h4>
-    <%if !unit.active_lease.nil?%>
+    <%if !unit.leases.nil?%>
       <br/>
       <h4>Current Lease: </h4>
-      <div id='<%='lease_' +unit.active_lease.id.to_s%>'>
-        <%=render :partial=>"leases/lease", :object=>unit.active_lease%>
+      <div id='<%='lease_' +unit.leases[0].id.to_s%>'>
+        <%=render :partial=>"leases/lease", :object=>unit.leases[0]%>
         
-        <%=render :partial=>"leases/leaseMenu", :locals=>{:lease=>unit.active_lease}%>
+        <%=render :partial=>"leases/leaseMenu", :locals=>{:lease=>unit.leases[0]}%>
       </div>
     <%end%>
   </div>
@@ -51,16 +55,25 @@
   </div>
 
   <div class="actions">
-  <% if !unit.rented? %>
-  | Upload existing lease |
-  | <%= link_to 'Send lease application', :controller=>"units", :action=>"new_application", :id=>unit %>
-  <%else%>
+  <% if !unit.leases[0].nil? %>
   | <%= link_to 'Add occupant', new_unit_occupancy_path(unit) %>
+  | <%= link_to 'View lease', unit.leases[0] %>
+  | <%= link_to 'Delete lease', unit.leases[0], :confirm => 'Are you sure?', :method => :delete %>
+  <% else %>
+  | New lease by uploading existing |
+  | <%= link_to 'Send lease application', :controller=>"units", :action=>"new_application", :id=>unit %>
   <%end%>
+  
   <% if !unit.listed? %>
-    | List unit |
+    <% remote_form_for(unit, :update=>'unit_'+unit.id.to_s) do |f| %>
+      <%=f.hidden_field :listed, :value=>true %>
+      <%= f.submit 'List the unit' %>
+    <%end%>
   <%else%>
-    | Remove listing |
+    <% remote_form_for(unit, :update=>'unit_'+unit.id.to_s) do |f| %>
+      <%=f.hidden_field :listed, :value=>0 %>
+      <%= f.submit 'Remove the listing' %>
+    <%end%>
   <%end%>
   </div>
 </div>
