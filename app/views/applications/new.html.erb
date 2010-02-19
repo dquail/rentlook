@@ -3,34 +3,21 @@
 <div class="rentlook_form">
   <% form_for([@unit,@application]) do |f| %>
     <%= f.error_messages %>
-    <fieldset>
-      <legend>Tenant Information</legend>
-      <div>
-        <%= f.label :tenant_id %>
-        <%= f.text_field :tenant_id %>
-      </div>
-    </fieldset>
+
     <fieldset>
       <legend>Rental information</legend>
-      <div>
-        <%= f.label :unit_id %>
-        <%= f.text_field :unit_id %>
-      </div>
-      <div>
-        <%= f.label :tenant_id %>
-        <%= f.text_field :tenant_id %>
-      </div>
+
       <div>
         <%= f.label :term_type %>
-        <%= f.text_field :term_type %>
+        <%= f.text_field :term_type, :disabled=>@user.type=="Tenant" %>
       </div>
       <div>
         <%= f.label :start_date %>
-        <%= f.date_select :start_date %>
+        <%= f.date_select :start_date, :disabled=>@user.type=="Tenant" %>
       </div>
       <div>
         <%= f.label :end_date %>
-        <%= f.date_select :end_date %>
+        <%= f.date_select :end_date, :disabled=>@user.type=="Tenant"  %>
       </div>
     </fieldset><br/>
     <%  fields_for @application.costs do |subform|%>
@@ -38,15 +25,15 @@
         <legend>Rental costs</legend>
         <div>
           <%= subform.label :first_month %>
-          <%= subform.text_field :first_month %>
+          <%= subform.text_field :first_month, :disabled=>@user.type=="Tenant"  %>
         </div>
         <div>
           <%= subform.label :security_deposit %>
-          <%= subform.text_field :security_deposit %>
+          <%= subform.text_field :security_deposit, :disabled=>@user.type=="Tenant"  %>
         </div>
         <div>
           <%= subform.label :credit_check %>
-          <%= subform.text_field :credit_check %>
+          <%= subform.text_field :credit_check, :disabled=>@user.type=="Tenant"  %>
         </div>
         <div>
           <%= subform.label :other %>
