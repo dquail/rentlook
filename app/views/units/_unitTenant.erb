@@ -1,79 +1,101 @@
-<div id='<%='unit_' +unit.id.to_s%>' class="unit">
-  <h1><%=h unit.name %></h1>
-  <div class="status">
-    <h4>Current Status:
-      <div id='<%='rented_' +unit.id.to_s%>'>
-        <% if unit.rented %>
-          Rented
-        <% else %>
-          Vacant
-        <%end%>
-      </div>
-      <div id='<%='listed_' +unit.id.to_s%>'>
-        <% if unit.listed %>
-          Listed
-        <%end%>
-      </div>
-    </h4>
-  </div>
-  <div id ="lease">
-    <h4>Current Lease:</h4>
-    <%if !unit.leases.nil?%>
-      <br/>
-      <h4>Current Lease: </h4>
-      <div id='<%='lease_' +unit.leases[0].id.to_s%>'>
-        <%=render :partial=>"leases/lease", :object=>unit.leases[0]%>
-        
-        <%=render :partial=>"leases/leaseMenu", :locals=>{:lease=>unit.leases[0]}%>
-      </div>
-    <%end%>
-  </div>
-  <div class="clear"></div>
-  <div id ="occupants">
-    <%if !unit.current_occupancies.nil?%>
-      <br/>
-      <h4>Current Occupants: </h4>
-      <div id='<%='unit_' +unit.id.to_s + '_occupants'%>'>
-        <%unit.current_occupancies.each do |current_occupancy|%>
-          <h4><%=current_occupancy.tenant.firstname%> <%=current_occupancy.tenant.lastname%></h4>
-        <%end%>
-      </div>
-    <%end%>
-  </div>
-  <div id ="applications">
-    <%if !unit.applications.nil?%>
-      <br/>
-      <h4>Applications: </h4>
-      <div id='<%='unit_' +unit.id.to_s + '_applications'%>'>
-        <%unit.applications.each do |application|%>
-          <h4> <%=  application.tenant.firstname%> <%=application.tenant.lastname %> <%=application.status %>
-           | <%= link_to 'View application', application %> | <%= link_to 'Delete application', application, :confirm => 'Are you sure?', :method=>:delete %> |
-          </h4>
-        <%end%>
-      </div>
-    <%end%>
-  </div>
+  <div class ="unit">
+    <h1><%=h unit.name %></h1>
+    <div class="status">
+      <h4>Current Status:
+        <span id='<%='rented_' +unit.id.to_s%>'>
+          <% if unit.rented %>
+            Rented
+          <% else %>
+            Vacant
+          <%end%>
+        </span>
+        <span id='<%='listed_' +unit.id.to_s%>'>
+          <% if unit.listed %>
+            Listed
+          <%end%>
+        </span>
+      </h4>
+    </div>
+    <div id ="lease">
+      <%if !unit.recent_lease.nil?%>
+        <%=render :partial=>"leases/leaseMenu", :locals=>{:lease=>unit.recent_lease}%>
+        <div id='<%='lease_' +unit.recent_lease.id.to_s%>'>
+          <%=render :partial=>"leases/lease", :object=>unit.recent_lease%>
+        </div>
+      <% else %>
+        <div class="lease_menu">
+          <div class="title">Lease:</div>
+          <div class="links">
+            | Upload existing lease |
+          </div>
+        </div>
+        <div class="lease">
+          There is no existing lease for this unit.  To create a lease, you may:
+          <ul>
+            <li>Upload an existing lease.  We'll create an electronic format for you.</li>
+            <li>Approve an application for a lease.</li>
+          </ul>
+          To start receiving applications for a unit you may List the unit by clicking list unit
+          below, or if you'd like
+          you can <%= link_to 'send a lease application', :controller=>"units", :action=>"new_application", :id=>unit %>
+          directly to a potential tenant.
+        </div>
+      <%end%>
+    </div>
+    <div class="clear"></div>
+    <div id ="occupants">
+      <%if unit.current_occupancies.count > 0 && !unit.recent_lease.nil? %>
+        <div class="lease_menu">
+          <div class="title">Additional occupants not on lease:</div>
+          <div class="links">
+            | <%= link_to 'Add additional occupant', new_unit_occupancy_path(unit) %> |
+          </div>
+        </div>
+        <div id='<%='unit_' +unit.id.to_s + '_occupants'%>'>
+          <%unit.current_occupancies.each do |current_occupancy|%>
+            <h4><%=current_occupancy.tenant.firstname%> <%=current_occupancy.tenant.lastname%></h4>
+          <%end%>
+        </div>
+      <%elsif !unit.recent_lease.nil?%>
+        <div class="lease_menu">
+          <div class="title">Additional occupants not on lease:</div>
+          <div class="links">
+            | <%= link_to 'Add additional occupant', new_unit_occupancy_path(unit) %> |
+          </div>
+        </div>
+        <div class='lease'>
+          You may add additional occupants to the unit who may not appear on the lease.
+          Just click on the link above.
+        </div>
+      <%end%>
 
-  <div class="actions">
-  <% if !unit.leases[0].nil? %>
-  | <%= link_to 'Add occupant', new_unit_occupancy_path(unit) %>
-  | <%= link_to 'View lease', unit.leases[0] %>
-  | <%= link_to 'Delete lease', unit.leases[0], :confirm => 'Are you sure?', :method => :delete %>
-  <% else %>
-  | New lease by uploading existing |
-  | <%= link_to 'Send lease application', :controller=>"units", :action=>"new_application", :id=>unit %>
-  <%end%>
-  
-  <% if !unit.listed? %>
-    <% remote_form_for(unit, :update=>'unit_'+unit.id.to_s) do |f| %>
-      <%=f.hidden_field :listed, :value=>true %>
-      <%= f.submit 'List the unit' %>
+    </div>
+
+    <%if unit.listed?%>
+      <div id ="applications">
+        <div class="lease_menu">
+          <div class="title">Applications:</div>
+          <div class="links">
+            <%= link_to '|  Send lease application', :controller=>"units", :action=>"new_application", :id=>unit %> |
+          </div>
+        </div>
+        <%if unit.applications.count > 0 %>
+          <div class="lease">
+            <div id='<%='unit_' +unit.id.to_s + '_applications'%>'>
+              <%unit.applications.each do |application|%>
+                <h4> <%=  application.tenant.firstname%> <%=application.tenant.lastname %> <%=application.status %>
+                 | <%= link_to 'View application', application %> | <%= link_to 'Delete application', application, :confirm => 'Are you sure?', :method=>:delete %> |
+                </h4>
+              <%end%>
+            </div>
+          </div>
+        <%else%>
+          <div class="lease">
+            Although listed, you currently have no applications for your unit.  You can send an
+            application form to a potential tenant by clicking the link above.
+          </div>
+        <%end%>
+      </div>
     <%end%>
-  <%else%>
-    <% remote_form_for(unit, :update=>'unit_'+unit.id.to_s) do |f| %>
-      <%=f.hidden_field :listed, :value=>0 %>
-      <%= f.submit 'Remove the listing' %>
-    <%end%>
-  <%end%>
+    <%= render :partial=>"units/unitTenantMenu", :locals=>{:unit=>unit} %>
   </div>
-</div>

@@ -5,8 +5,12 @@ class ApplicationsController < ApplicationController
   # GET /applications.xml
   def index
     find_unit
-
-    @applications = @unit.applications
+    if !@unit
+      @applications = current_user.applications
+    else
+      @applications = @unit.applications
+    end
+    
 
     respond_to do |format|
       format.html # index.html.erb
@@ -61,7 +65,7 @@ class ApplicationsController < ApplicationController
 
     respond_to do |format|
       if @application.save
-        flash[:notice] = 'Application was successfully created.'
+        flash[:notice] = 'Application was successfully created.  An email was sent to them which they can use to complete the application.'
         format.html { redirect_to(@application) }
         format.xml  { render :xml => @application, :status => :created, :location => @application }
       else
@@ -74,6 +78,7 @@ class ApplicationsController < ApplicationController
   # PUT /applications/1
   # PUT /applications/1.xml
   def update
+
     @application = Application.find(params[:id])
     @application.costs = ApplicationCosts.create(params[:application_costs])
     @application.bank_info = ApplicationBankInfo.create(params[:application_bank_info])
@@ -84,11 +89,18 @@ class ApplicationsController < ApplicationController
     if @user.class == Tenant
       @application.tenant = @user
     end
+    if current_user.class==Landlord
+      notifying_user = @application.tenant
+    else
+      notifying_user = @application.unit.property.landlord
+    end
 
     respond_to do |format|
       if @application.update_attributes(params[:application])
         if @application.save
-          flash[:notice] = 'Application was successfully updated.'
+          #AccountMailer.deliver_application_update_for_unit(current_user, notifying_user, @application)
+          @application.deliver_update_email(current_user, notifying_user)
+          flash[:notice] = 'Application was successfully updated.  An email was sent notifying.'
           format.html { redirect_to(@application) }
           format.xml  { head :ok }
         else
@@ -137,11 +149,12 @@ class ApplicationsController < ApplicationController
         if @application.save
           if @lease.save
             if current_user.class==Landlord
-              AccountMailer.deliver_lease_for_unit(@lease.tenant, current_user, @lease)
+              @lease.deliver_to_tenant(current_user)
             elsif current_user.class==Tenant
-              AccountMailer.deliver_lease_for_unit(@lease.unit.property.landlord, current_user, @lease)
+              @lease.deliver_to_landlord(current_user)
             end
-            flash[:notice] = 'Application was successfully approved.'
+            flash[:notice] = 'Application was successfully approved.  A lease was also generated which needs to be '+
+              ' approved by you and the tenant.  An email has been sent to the tenant which they will be able to view and approve their portion of the lease'
             format.html { redirect_to(@lease.unit) }
             format.xml  { head :ok }
           else
@@ -161,6 +174,7 @@ class ApplicationsController < ApplicationController
     @application.status = 'R'
     respond_to do |format|
       if @application.save
+        self.deliver_application_rejected_email
         flash[:notice] = 'Application was successfully rejected.'
         format.html { redirect_to(@application) }
         format.xml  { head :ok }
@@ -173,7 +187,12 @@ class ApplicationsController < ApplicationController
 
 private
   def find_unit
-    @unit = Unit.find(params[:unit_id])
+    if params[:unit_id]
+      @unit = Unit.find(params[:unit_id])
+    else
+      @unit = nil
+    end
+    
   end
 
 end

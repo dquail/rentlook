@@ -18,7 +18,9 @@ class Unit < ActiveRecord::Base
 #  has_one :active_lease,
 #          :class_name => 'Lease',
 #          :conditions => "landlord_approved= true AND tenant_approved=true"
-
+  has_one :recent_lease,
+          :class_name => 'Lease',
+          :order => 'id DESC'
 
 protected
   def rent_validation

@@ -1,14 +1,21 @@
-<h1>Confirm my account Password</h1>
-
-<% form_tag new_user_instruction_url(@user.perishable_token), :method=>:put do %>
-
-  <%= hidden_field_tag 'id', @user.perishable_token%>
-
-  <label>Password: </label><br />
-  <%= password_field_tag :password %>  <br />
-
-  <label>Password confirmation: </label>  <br />
-  <%= password_field_tag :password_confirmation %><br />
-  <br />
-  <%= submit_tag "Confirm my account and log me in" %>
-<% end %>
+<h4>To complete your Rentlook account, simply enter a password.  You'll be logged in
+and able to use Rentlook once you've done this.</h4>
+<div class="rentlook_form">
+  <% form_tag new_user_instruction_url(@user.perishable_token), :method=>:put do %>
+    <fieldset>
+      <legend>Enter a password to complete your account</legend>
+      <%= hidden_field_tag 'id', @user.perishable_token%>
+      <div>
+        <label>Password: </label>
+        <%= password_field_tag :password %>
+      </div>
+      <div>
+        <label>Password confirmation: </label>
+        <%= password_field_tag :password_confirmation %>
+      </div>
+      <div>
+        <%= submit_tag "Confirm my account and log me in" %>
+      </div>
+    </fieldset>
+  <% end %>
+</div>

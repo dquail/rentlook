@@ -1,7 +1,14 @@
 <div id="property_menu"><span class="title">My Properties</span><span class="link"><%= link_to 'New property', new_property_path %></span></div>
-
+<%if @properties.length == 0 %>
+  <br/>
+  <h3>You currently do not have any properties managed with Rentlook.  You can quickly add properties,
+  and manage units to make your life easier.  Click "new property" to begin setting yourself up with
+  rentlook.</h3>
+<%else%>
 <%@properties.each do |property|%>
   <%= render(:partial =>"property", :object=>property) %>
   <%= render(:partial =>"propertyMenu", :locals=>{:property=>property}) %>
 <%end%>
+<%end%>
+
 

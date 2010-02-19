@@ -14,8 +14,16 @@
 .lease
 {
     padding:5px;
+    margin-top:2px;
     margin:20px;
     background-color:#d2edfe;
+    width:95%;
+}
+.fine_print
+{
+    font-size:10px;
+    margin:20px;
+    font-style:italic;
 }
 .lease h1
 {
@@ -51,4 +59,23 @@
     margin:5px;
     clear:both;
     text-align: right;
+}
+
+.lease_menu
+{
+    padding-left:15px;
+    padding-right:15px;
+    padding-bottom:2px;
+    margin-bottom:2px;
+}
+.lease_menu .title
+{
+    font-size:14px;
+    float: left;
+}
+
+.lease_menu .links
+{
+    font-size:12px;
+    float: right;
 }

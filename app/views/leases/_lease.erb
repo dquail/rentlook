@@ -1,6 +1,12 @@
 <div class="lease">
   <div class="tenant">
-    <h4>Landlord Approved: <%=lease.landlord_approved%> Tenant Approved: <%=lease.tenant_approved%></h4>
+    <%if !lease.landlord_approved%>
+      <h4>Landlord has not accepted the lease.!</h4>
+    <%end%>
+    <%if !lease.tenant_approved%>
+      <h4>Tenant has not accepted!</h4>
+    <%end%>
+        
     <h4>Tenant Name: <%=h lease.tenant.firstname%> <%=h lease.tenant.lastname%></h4>
     <h4>Phone: <%=h lease.tenant.phone_number%></h4>
     <h4>Email: <%=h lease.tenant.email%></h4>
@@ -12,5 +18,5 @@
     <h4>Auto rent collect: <%=h lease.auto_collect %> </h4>
     <h4>Auto increase: <%=h lease.auto_incriment%> Anual increase: <%=h lease.auto_incriment_pct%></h4>
   </div>
-
+  <div class ="clear"></div>
 </div>

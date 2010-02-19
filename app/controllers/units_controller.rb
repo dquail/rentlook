@@ -118,16 +118,21 @@ class UnitsController < ApplicationController
     @tenant = Tenant.find_by_email(@applier.email)
     if @tenant
       @application.tenant = @tenant
+      new_user = false
     else
       @tenant = Tenant.create_with_perishable_token(@applier)
+      new_user = true
     end
 
     respond_to do |format|
       Tenant.transaction do
         @tenant.save
+        if new_user 
+          @tenant.deliver_new_user_instructions!(current_user)
+        end
         @application.tenant=@tenant
         if @application.save
-          AccountMailer.deliver_application_for_unit(@tenant, current_user, @application)
+          @application.deliver_new_application_email(current_user,@tenant)
           flash[:notice] = 'Application was created successfully for user.'
           format.html { redirect_to @unit }
         else

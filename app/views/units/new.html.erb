@@ -1,34 +1,36 @@
-<h1>New unit for <%=  @property.name %></h1>
-
-<% form_for([@property, @unit]) do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :bedrooms %><br />
-    <%= f.text_field :bedrooms %>
-  </p>
-  <p>
-    <%= f.label :bathrooms %><br />
-    <%= f.text_field :bathrooms %>
-  </p>
-  <p>
-    <%= f.label :square_feet %><br />
-    <%= f.text_field :square_feet %>
-  </p>
-  <p>
-    <%= f.label :base_rent %><br />
-    <%= f.text_field :base_rent %>
-  </p>
-  <p>
-    <%= f.label :amenities %><br />
-    <%= f.text_area :amenities %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
-<% end %>
-
+<div class="rentlook_form">
+  <% form_for([@property, @unit]) do |f| %>
+    <fieldset>
+      <legend>Enter the unit details</legend>
+      <%= f.error_messages %>
+      <p>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </p>
+      <p>
+        <%= f.label :bedrooms %>
+        <%= f.text_field :bedrooms %>
+      </p>
+      <p>
+        <%= f.label :bathrooms %>
+        <%= f.text_field :bathrooms %>
+      </p>
+      <p>
+        <%= f.label :square_feet %>
+        <%= f.text_field :square_feet %>
+      </p>
+      <p>
+        <%= f.label :base_rent %>
+        <%= f.text_field :base_rent %>
+      </p>
+      <p>
+        <%= f.label :amenities %>
+        <%= f.text_area :amenities %>
+      </p>
+      <p>
+        <%= f.submit 'Create' %>
+      </p>
+    </fieldset>
+  <% end %>
+</div>
 <%= link_to 'Back', property_units_path %>

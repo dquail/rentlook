@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :occupancies
   map.resources :listings
+  map.resources :applications, :only => [:index]
   map.resources :user_sessions
   map.resources :password_resets, :except => [:show]
   map.resources :new_user_instructions

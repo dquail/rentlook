@@ -51,7 +51,7 @@ class PropertiesController < ApplicationController
           @property.units.build(:name => unit.to_s, :bedrooms=>1, :bathrooms=>1, :square_feet => 1000, :base_rent=>1000)
         end
         if (@property.save)
-          flash[:notice] = 'Property and units creted.'
+          flash[:notice] = 'Property and units created!'
         else
           flash[:notice] = 'Property creted, but errors creating units.'
         end

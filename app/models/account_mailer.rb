@@ -1,6 +1,6 @@
 class AccountMailer < ActionMailer::Base
   #default_url_options[:host] = "localhost:3000"
-  default_url_options[:host] = "http://www.rentlook.com"
+  default_url_options[:host] = "rentlook.com"
 
   def password_reset_instructions(user)
     subject    'Password reset instructions'
@@ -38,6 +38,24 @@ class AccountMailer < ActionMailer::Base
     body       :application => application, :inviting_user=> inviting_user
   end
 
+  def application_update_for_unit(editing_user, notified_user, application)
+    subject    editing_user.firstname + ' ' + editing_user.lastname + 'has updated your application on Rentlook'
+    recipients notified_user.email
+    from       'accounts@rentlook.com'
+    sent_on    Time.now
+
+    body       :application => application, :editing_user=> editing_user
+  end
+
+  def application_rejected_for_unit(application)
+    subject    application.unit.property.landlord.firstname + ' ' + application.unit.property.landlord.firstname + ' rejected your application'
+    recipients application.tenant.email
+    from       'accounts@rentlook.com'
+    sent_on    Time.now
+
+    body       :application => application
+  end
+
   def lease_for_unit(user, inviting_user, lease)
     subject    inviting_user.firstname + ' ' + inviting_user.lastname + 'has sent you a Rentlook lease'
     recipients user.email
@@ -46,4 +64,15 @@ class AccountMailer < ActionMailer::Base
 
     body       :lease => lease, :inviting_user=> inviting_user
   end
+
+  def lease_update_for_unit(user, inviting_user, lease)
+    subject    inviting_user.firstname + ' ' + inviting_user.lastname + 'has sent you a Rentlook lease'
+    recipients user.email
+    from       'accounts@rentlook.com'
+    sent_on    Time.now
+
+    body       :lease => lease, :inviting_user=> inviting_user
+  end
+
+
 end

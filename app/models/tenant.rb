@@ -1,6 +1,11 @@
 class Tenant < User  
   has_many :leases
   has_many :occupancies
+
+  def applications
+    applications = Application.find_all_by_tenant_id self.id
+    return applications
+  end
   
   def self.create_with_perishable_token(user)
     @existing_user = User.find_by_email(user.email)

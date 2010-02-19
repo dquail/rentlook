@@ -1,0 +1,15 @@
+  <div class="actions">
+  <% if !unit.listed? %>
+    <% remote_form_for(unit, :update=>'unit_'+unit.id.to_s) do |f| %>
+      <%=f.hidden_field :listed, :value=>true %>
+      <%= f.submit 'List the unit' %>
+    <%end%>
+  <%else%>
+    <span>
+      <% remote_form_for(unit, :update=>'unit_'+unit.id.to_s) do |f| %>
+        <%=f.hidden_field :listed, :value=>0 %>
+        <%= f.submit 'Remove the listing' %>
+      <%end%>
+    </span>
+  <%end%>
+  </div>

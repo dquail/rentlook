@@ -3,6 +3,8 @@
 <div id="units_menu"><span class="title">Unit / Tenant Setup</span><span class="link"><%= link_to 'New unit', new_property_unit_path(@property) %></span></div>
 <div id="units">
   <%@property.units.each do |unit|%>
-  <%=render :partial=>"units/unitTenant", :locals=>{:unit=>unit} %>
+  <div id='<%='unit_' +unit.id.to_s%>'>
+    <%=render :partial=>"units/unitTenant", :locals=>{:unit=>unit} %>
+  </div>
   <%end%>
 </div>

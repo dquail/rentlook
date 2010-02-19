@@ -78,4 +78,16 @@ class Application < ActiveRecord::Base
                 %w[ loan_payment            loan_owed   ],
                 %w[ loan_payment            loan_payment   ]
               ]
+
+  def deliver_application_rejected_email
+    AccountMailer.deliver_application_for_unit_rejected(self)
+  end
+
+  def deliver_update_email(editing_user,notified_user)
+    AccountMailer.deliver_application_update_for_unit(editing_user, notified_user, self)
+  end
+
+  def deliver_new_application_email(from_user, to_user)
+    AccountMailer.deliver_application_for_unit(to_user, from_user, self)
+  end
 end

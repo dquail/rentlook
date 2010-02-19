@@ -55,6 +55,13 @@ class LeasesController < ApplicationController
   # GET leases/1/edit
   def edit
     @lease = Lease.find(params[:id])
+    if @lease.tenant_approved && @lease.landlord_approved
+        flash[:notice] = 'Lease has already been accepted by both landlord and tenant.  You can not edit.'
+        respond_to do |format|
+          format.html {redirect_to(@lease)}
+          format.xml { render :xml => @lease}
+        end
+    end
   end
 
   # POST /unit/1/leases
@@ -85,6 +92,12 @@ class LeasesController < ApplicationController
         if @lease.landlord_approved && @lease.tenant_approved
           @lease.unit.update_attribute(:rented, true)
         end
+        if current_user==Tenant
+          @lease.deliver_lease_update_for_unit(@lease.unit.property.landlord, current_user)
+        else
+          @lease.deliver_lease_update_for_unit(@lease.tenant, current_user)
+        end
+
         flash[:notice] = 'Lease was successfully updated.'
         format.html { redirect_to(@lease) }
         format.xml  { head :ok }

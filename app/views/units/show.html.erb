@@ -1,5 +1,9 @@
 <%=render :partial=>'properties/property', :locals=>{:property=>@unit.property}%>
-<%=render :partial=>'unit' %>
-
-<%= link_to 'Edit', edit_property_path(@unit) %> |
-<%= link_to 'Back', @property %>
+<div id="unit">
+  <%=render :partial=>'unit' %>
+</div>
+<div class="actions">
+  <%= link_to "Tenant / Unit setup", @unit.property %>
+  <%= link_to 'Edit', edit_property_path(@unit) %> |
+  <%= link_to 'Back', @property %>
+</div>

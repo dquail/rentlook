@@ -137,6 +137,16 @@ color: #C03;
     text-decoration:none;
 }
 /***************************** CONTENT **********************************/
+#flash_notice
+{
+    text-align:center;
+    font-size:15px;
+    font-weight:bold;
+    background-color:#f0fa9d;
+    
+    margin:5px;
+}
+
 .anchor
 {
     position:relative;

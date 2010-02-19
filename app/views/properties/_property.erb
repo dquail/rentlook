@@ -2,7 +2,7 @@
   <%if property.photo_file_name.nil?%>
     <%= image_tag 'apartment.png'%>
   <%else%>
-    <%= image_tag property.photo.url%>
+    <%= image_tag property.photo.url(:small)%>
   <%end%>
   <div class="address">
     <h4>Name: <%=h property.name %></h4>

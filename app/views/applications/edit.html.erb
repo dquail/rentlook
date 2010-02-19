@@ -4,22 +4,22 @@
   <% form_for([@unit,@application]) do |f| %>
     <%= f.error_messages %>
     <fieldset>
-      <legend>Tenant Information</legend>
+      <legend>Applicant Information</legend>
       <div>
-        <%= f.label :tenant_id %>
-        <%= f.text_field :tenant_id %>
+        <%= f.label @application.tenant.firstname + " " +@application.tenant.lastname %>
+      </div>
+      <br/>
+      <div>
+        <%= f.label @application.tenant.email %>
+      </div>
+      <br/>
+      <div>
+        <%= f.label @application.tenant.phone_number %>
       </div>
     </fieldset>
+    <br/>
     <fieldset>
       <legend>Rental information</legend>
-      <div>
-        <%= f.label :unit_id %>
-        <%= f.text_field :unit_id %>
-      </div>
-      <div>
-        <%= f.label :tenant_id %>
-        <%= f.text_field :tenant_id %>
-      </div>
       <div>
         <%= f.label :term_type %>
         <%= f.text_field :term_type %>
@@ -58,7 +58,7 @@
 
     <%  fields_for @application.rental_history do |subform|%>
       <fieldset>
-        <legend>Rental history</legend>
+        <legend>Applicant Rental history</legend>
         <div class="subtitle">Current Rental</div>
         <div>
           <%= subform.label "Address" %>
@@ -129,7 +129,7 @@
 
     <%  fields_for @application.employment_history do |subform|%>
       <fieldset>
-        <legend>Employment History</legend>
+        <legend>Applicant Employment History</legend>
         <div class="subtitle">Current Employer info</div>
         <div>
           <%= subform.label "Name"%>
@@ -179,7 +179,7 @@
 
      <%  fields_for @application.income do |subform|%>
       <fieldset>
-        <legend>Income information</legend>
+        <legend>Applicant Income information</legend>
         <div>
           <%= subform.label "Monthly Gross" %>
           <%= subform.text_field :gross %>
@@ -213,7 +213,7 @@
 
     <%  fields_for @application.credit_info do |subform|%>
       <fieldset>
-        <legend>Credit information</legend>
+        <legend>Applicant Credit information</legend>
         <div>
           <%= subform.label "Credit type Visa, etc" %>
           <%= subform.text_field :credit_type %>
@@ -247,6 +247,3 @@
 
   <% end %>
 </div>
-
-<%= link_to 'Show', @application %> |
-<%= link_to 'Other applications for unit', unit_applications_path(@application.unit) %>

@@ -2,3 +2,4 @@
   <%=h @lease.unit.property.name%> - <%=h @lease.unit.name%>
 </h1>
 <%=render(:partial=>"lease")%>
+<%=render(:partial=>"leaseMenu", :locals=>{:lease=>@lease}) %>

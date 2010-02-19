@@ -73,7 +73,9 @@
   <h4>Amount owed: <%=application.credit_info.credit_owed%></h4>
   <h4>Monthly payments: <%=application.credit_info.credit_payment%></h4>
 
+
   <div class ="actions">
+    <%if current_user.type == "Landlord"%>
   | <%= link_to "Approve application",
           {:controller=>'applications',
            :action=>'approve',
@@ -84,6 +86,8 @@
            :action=>'reject',
            :id=>@application.id}, {:confirm => "Are you sure you'd like to reject the application?", :method=>:put}
           %> |
+    <%end%>
+    <%= link_to "Edit application", edit_application_path(@application) %>
   | Final Action |
 
   </div>

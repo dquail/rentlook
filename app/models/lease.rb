@@ -6,6 +6,18 @@ class Lease < ActiveRecord::Base
   
   belongs_to :unit
   belongs_to :tenant, :class_name=> "Tenant", :foreign_key =>"tenant_id"
+
+  def deliver_to_tenant(from_user)
+    AccountMailer.deliver_lease_for_unit(self.tenant, from_user, self)
+  end
+
+  def deliver_to_landlord(from_user)
+    AccountMailer.deliver_lease_for_unit(self.unit.property.landlord, from_user, self)
+  end
+
+  def deliver_lease_update_for_unit(user, inviting_user)
+    AccountMailer.deliver_lease_update_for_unit(user, inviting_user, self)
+  end
 protected
   def rent_due_date_validation
     puts rent_due_date

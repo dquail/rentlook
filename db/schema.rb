@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100216024537) do
+ActiveRecord::Schema.define(:version => 20100218235005) do
 
   create_table "applications", :force => true do |t|
     t.integer  "unit_id"
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(:version => 20100216024537) do
     t.integer  "rent_due_date",      :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "landlord_approved",  :default => true
+    t.boolean  "landlord_approved",  :default => false
     t.boolean  "tenant_approved",    :default => false
   end
 
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(:version => 20100216024537) do
 
   create_table "properties", :force => true do |t|
     t.integer  "landlord_id"
-    t.string   "name",               :limit => 30
+    t.string   "name",               :limit => 30, :default => "1"
     t.string   "address",            :limit => 30
     t.string   "city",               :limit => 30
     t.string   "state",              :limit => 20
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(:version => 20100216024537) do
     t.string   "country",            :limit => 20
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "image_url"
+    t.string   "image_url",                        :default => "apartment.png"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"

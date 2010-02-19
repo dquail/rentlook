@@ -5,7 +5,7 @@ before_filter :load_user_using_perishable_token
       @user.verify!
       flash[:notice] = "Thank you for verifying your account. You may now login."
     end
-    redirect_to account_url
+    redirect_to login_url
   end
 
 private

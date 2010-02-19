@@ -44,7 +44,7 @@ class LandlordsController < ApplicationController
     respond_to do |format|
       if @landlord.save
         flash[:notice] = 'Landlord registration successful.'
-        format.html { redirect_to account_url }
+        format.html { redirect_to signin_url }
         format.xml  { render :xml => @landlord, :status => :created, :location => @landlord }
       else
         format.html { render :action => "new" }
