@@ -10,5 +10,12 @@
   Email:
   <%=@user.email %>
 </p>
-<%= link_to pluralize(@user.properties.size, 'property'), properties_path %>
-<%= link_to "Add property", new_property_path %>
+<p>
+  <%if @user.photo_file_name.nil?%>
+    <%= image_tag 'user.png'%>
+  <%else%>
+    <%= image_tag @user.photo.url(:small)%>
+  <%end%>
+</p>
+
+<%= link_to "Edit", edit_user_path(@user) %>

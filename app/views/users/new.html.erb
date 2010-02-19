@@ -4,7 +4,7 @@ properties, or to make life easier as a Tenant</h3>
 <div class="rentlook_form">
   <fieldset>
     <legend>Enter your user information to signup</legend>
-    <% form_for(@user) do |f| %>
+    <% form_for(@user,:html=>{ :multipart=>true}) do |f| %>
       <%= f.error_messages %>
 
       <div>
@@ -21,7 +21,10 @@ properties, or to make life easier as a Tenant</h3>
         <%= f.label :lastname %>
         <%= f.text_field :lastname %>
       </div>
-
+      <div>
+        <%= f.label :photo %>
+        <%=f.file_field :photo%>
+      </div>
       <div>
         <%= f.label :email %>
         <%= f.text_field :email %>

@@ -1,31 +1,38 @@
-<h1>Editing user</h1>
+<div class="rentlook_form">
+  <% form_for @user, :html=>{ :multipart=>true} do |f| %>
+    <%= f.error_messages %>
 
-<% form_for(@user) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :firstname %><br />
-    <%= f.text_field :firstname %>
-  </p>
-  <p>
-    <%= f.label :lastname %><br />
-    <%= f.text_field :lastname %>
-  </p>
-  <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @user %> |
+    <fieldset>
+      <legend>Enter user information</legend>
+        <div>
+          <%= f.label :firstname %>
+          <%= f.text_field :firstname %>
+        </div>
+        <div>
+          <%= f.label :lastname %>
+          <%= f.text_field :lastname %>
+        </div>
+        <div>
+          <%= f.label :photo %>
+          <%=f.file_field :photo%>
+        </div>
+        <div>
+          <%= f.label :email %>
+          <%= f.text_field :email %>
+        </div>
+        <div>
+          <%= f.label :password %>
+          <%= f.password_field :password %>
+        </div>
+        <div>
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation %>
+        </div>
+        <div>
+          <%= f.submit 'Update' %>
+        </div>
+    </fieldset>
+  <% end %>
+  <br/>
+  <%= link_to 'Show', @user %> |
+</div>

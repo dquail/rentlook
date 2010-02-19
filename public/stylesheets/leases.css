@@ -19,6 +19,10 @@
     background-color:#d2edfe;
     width:95%;
 }
+.lease img
+{
+    float:left;
+}
 .fine_print
 {
     font-size:10px;

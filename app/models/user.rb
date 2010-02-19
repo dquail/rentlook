@@ -1,8 +1,17 @@
 class User < ActiveRecord::Base
+
+  has_attached_file :photo,
+                  :styles => { :small => "150x150>", :thumb => "35X35>" },
+                  :url => "/assets/users/:id/:style/:basename.:extension",
+                  :path => ":rails_root/public/assets/users/:id/:style/:basename.:extension",
+                  :default =>"/images/user.png"
+
   acts_as_authentic do |c|
     login_field :email
     validate_login_field :false
   end
+  
+  validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png'], :allow_nil=>true
   validates_presence_of :firstname, :lastname, :email, :type
   validates_uniqueness_of :email
 

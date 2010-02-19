@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100218235005) do
+ActiveRecord::Schema.define(:version => 20100219054509) do
 
   create_table "applications", :force => true do |t|
     t.integer  "unit_id"
@@ -168,17 +168,21 @@ ActiveRecord::Schema.define(:version => 20100218235005) do
     t.string   "email"
     t.string   "crypted_password"
     t.string   "password_salt"
-    t.string   "persistence_token",              :default => ""
+    t.string   "persistence_token",               :default => ""
     t.integer  "login_count"
     t.datetime "last_request_at"
     t.datetime "last_login_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "type",                           :default => "Landlord"
-    t.string   "status",            :limit => 1
+    t.string   "type",                            :default => "Landlord"
+    t.string   "status",             :limit => 1
     t.string   "phone_number"
-    t.string   "perishable_token",               :default => "",         :null => false
-    t.boolean  "verified",                       :default => false
+    t.string   "perishable_token",                :default => "",         :null => false
+    t.boolean  "verified",                        :default => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

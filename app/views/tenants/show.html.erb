@@ -1,4 +1,5 @@
 <h2>Welcome <%=@user.firstname %> <%=@user.lastname %></h2>
+
 <p>
   You are registered with Rentlook as a Tenant as <%=@user.username %>
 </p>
@@ -6,4 +7,8 @@
   Email:
   <%=@user.email %>
 </p>
-<%= link_to pluralize(@tenant.leases.size, 'leases'), tenant_leases_path(@user) %>
+<p>
+  <%= image_tag @user.photo.url(:small) %>
+</p>
+
+<%= link_to "Edit", edit_user_path(@user) %>

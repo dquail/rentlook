@@ -15,7 +15,7 @@ class UserSessionsController < ApplicationController
     if (@user_session.save)
       user = current_user
       if user.class ==Tenant
-        redirect_to properties_url(user)
+        redirect_to applications_url
       elsif user.class == Landlord
         redirect_to properties_url
       end
