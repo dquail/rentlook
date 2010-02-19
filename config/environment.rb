@@ -30,16 +30,16 @@ Rails::Initializer.run do |config|
 #ActionMailer::Base.default_charset = "utf-8"
 #ActionMailer::Base.default_content_type = "text/html"
 
-#  config.action_mailer.delivery_method=:sendmail
-  
-  config.action_mailer.smtp_settings = {
-    :address => "mail.rentlook.com",
-    :port => 26,
-    :domain => "mail.rentlook.com",
-    :authentication => "login",
-    :user_name => "accounts@rentlook.com",
-    :password => "!Build#"
-  }
+  config.action_mailer.delivery_method=:sendmail
+
+config.action_mailer.smtp_settings = {
+  :address => "mail.rentlook.com",
+  :port => 26,
+  :domain => "mail.rentlook.com",
+  :authentication => "login",
+  :user_name => "accounts@rentlook.com",
+  :password => "!Build#"
+}
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
