@@ -9,7 +9,7 @@
     <%if lease.tenant.photo_file_name.nil?%>
       <%= image_tag 'user.png'%>
     <%else%>
-      <%= image_tag tenant.photo.url(:thumb)%>
+      <%= image_tag lease.tenant.photo.url(:thumb)%>
     <%end%>
     <h4>Name: <%=h lease.tenant.firstname%> <%=h lease.tenant.lastname%></h4>
     <h4>Phone: <%=h lease.tenant.phone_number%></h4>

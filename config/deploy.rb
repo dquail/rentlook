@@ -63,13 +63,3 @@ task :after_deploy do
     "chmod 755 #{current_path}/#{item}"
   end.join(" && "))
 end
-
-# ==================================
-# Set up the assets symlink
-# ==================================
-desc "Symlink shared configs and folders on each release."
-task :symlink_shared do
-  run "ln -nfs #{shared_path}/assets #{release_path}/public/assets"
-end
-
-after 'deploy:update_code', 'deploy:symlink_shared'
