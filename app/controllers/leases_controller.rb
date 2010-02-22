@@ -1,4 +1,5 @@
 class LeasesController < ApplicationController
+  filter_resource_access
   before_filter :authorize
   
   # GET /unit/1/leases
@@ -31,7 +32,7 @@ class LeasesController < ApplicationController
   # GET /leases/1
   # GET /leases/1.xml
   def show
-    @lease = Lease.find(params[:id])
+    #@lease = Lease.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -43,7 +44,7 @@ class LeasesController < ApplicationController
   # GET unit/1/leases/new
   # GET unit/1/leases/new.xml
   def new
-    @unit = Unit.find(params[:unit_id])
+    #@unit = Unit.find(params[:unit_id])
     @lease = @unit.leases.new
 
     respond_to do |format|
@@ -54,7 +55,7 @@ class LeasesController < ApplicationController
 
   # GET leases/1/edit
   def edit
-    @lease = Lease.find(params[:id])
+    #@lease = Lease.find(params[:id])
     if @lease.tenant_approved && @lease.landlord_approved
         flash[:notice] = 'Lease has already been accepted by both landlord and tenant.  You can not edit.'
         respond_to do |format|
@@ -67,7 +68,7 @@ class LeasesController < ApplicationController
   # POST /unit/1/leases
   # POST /unit/1/leases.xml
   def create
-    @unit = Unit.find(params[:unit_id])
+    #@unit = Unit.find(params[:unit_id])
     @lease = @unit.leases.new(params[:lease])
 
     respond_to do |format|
@@ -85,7 +86,7 @@ class LeasesController < ApplicationController
   # PUT /leases/1
   # PUT /leases/1.xml
   def update
-    @lease = Lease.find(params[:id])
+    #@lease = Lease.find(params[:id])
 
     respond_to do |format|
       if @lease.update_attributes(params[:lease])
@@ -111,7 +112,7 @@ class LeasesController < ApplicationController
   # DELETE /leases/1
   # DELETE /leases/1.xml
   def destroy
-    @lease = Lease.find(params[:id])
+    #@lease = Lease.find(params[:id])
     @lease.destroy
 
     respond_to do |format|

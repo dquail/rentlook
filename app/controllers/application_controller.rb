@@ -6,9 +6,22 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
+  before_filter { |c| Authorization.current_user = c.current_user }
+
 helper_method :current_user
 
+
+def current_user
+  return @current_user if defined?(@current_user)
+  @current_user = current_user_session && current_user_session.record
+end
+
 protected
+def permission_denied
+  flash[:notice] = "Sorry, you are not allowed to access that page."
+  redirect_to login_url
+end
+
 def authorize
   if current_user_session
     @user = current_user
@@ -48,9 +61,5 @@ def current_user_session
   @current_user_session = UserSession.find
 end
 
-def current_user
-  return @current_user if defined?(@current_user)
-  @current_user = current_user_session && current_user_session.record
-end
 
 end

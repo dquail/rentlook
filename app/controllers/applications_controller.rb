@@ -1,4 +1,5 @@
 class ApplicationsController < ApplicationController
+  filter_resource_access
   before_filter :authorize
   
   # GET /applications
@@ -21,7 +22,7 @@ class ApplicationsController < ApplicationController
   # GET /applications/1
   # GET /applications/1.xml
   def show
-    @application = Application.find(params[:id])
+    #@application = Application.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -45,7 +46,7 @@ class ApplicationsController < ApplicationController
 
   # GET /applications/1/edit
   def edit
-    @application = Application.find(params[:id])
+    #@application = Application.find(params[:id])
   end
 
   # POST /applications

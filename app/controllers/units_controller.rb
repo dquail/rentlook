@@ -1,4 +1,5 @@
 class UnitsController < ApplicationController
+  filter_resource_access
   before_filter :authorize
 
   # GET /units
@@ -26,7 +27,7 @@ class UnitsController < ApplicationController
   # GET /units/1
   # GET /units/1.xml
   def show
-    @unit = Unit.find(params[:id])
+    #@unit = Unit.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -48,7 +49,7 @@ class UnitsController < ApplicationController
 
   # GET /units/1/edit
   def edit
-    @unit = Unit.find(params[:id])
+    #@unit = Unit.find(params[:id])
   end
 
   # POST /units
@@ -72,7 +73,7 @@ class UnitsController < ApplicationController
   # PUT /units/1
   # PUT /units/1.xml
   def update
-    @unit = Unit.find(params[:id])
+    #@unit = Unit.find(params[:id])
 
     respond_to do |format|
       if @unit.update_attributes(params[:unit])
@@ -91,7 +92,7 @@ class UnitsController < ApplicationController
   # DELETE /units/1
   # DELETE /units/1.xml
   def destroy
-    @unit = Unit.find(params[:id])
+    #@unit = Unit.find(params[:id])
     @unit.destroy
 
     respond_to do |format|

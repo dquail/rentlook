@@ -2,6 +2,10 @@ class Tenant < User
   has_many :leases
   has_many :occupancies
 
+  def role_symbols
+    [:tenant]
+  end
+
   def applications
     applications = Application.find_all_by_tenant_id self.id
     return applications

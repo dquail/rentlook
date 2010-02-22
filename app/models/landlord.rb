@@ -2,6 +2,10 @@ class Landlord < User
   has_many :properties
   has_many :units, :through=>:properties
 
+  def role_symbols
+    [:landlord]
+  end
+
   def applications
     applications = []
     units.each do |unit|
