@@ -22,7 +22,7 @@ authorization do
 
     #Application Permissions
     has_permission_on [:applications], :to => [:index, :new, :create]
-    has_permission_on [:applications], :to => [:show, :edit, :update, :destroy] do
+    has_permission_on [:applications], :to => [:show, :edit, :update, :destroy, :approve, :reject] do
       if_attribute :unit => {:property => {:landlord => is {user}}}
     end
 
