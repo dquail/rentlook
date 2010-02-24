@@ -18,6 +18,8 @@ class UserSessionsController < ApplicationController
         redirect_to applications_url
       elsif user.class == Landlord
         redirect_to properties_url
+      else
+        redirect_to applications_url
       end
     else
       render :action => 'new'

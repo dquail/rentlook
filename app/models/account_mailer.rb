@@ -21,7 +21,7 @@ class AccountMailer < ActionMailer::Base
   end
 
   def new_user_instructions(user, inviting_user)
-    subject    inviting_user.firstname + ' ' + inviting_user.lastname + 'invites you to Rentlook'
+    subject    inviting_user.firstname + ' ' + inviting_user.lastname + ' invites you to Rentlook'
     recipients user.email
     from       'accounts@rentlook.com'
     sent_on    Time.now
@@ -30,7 +30,7 @@ class AccountMailer < ActionMailer::Base
   end
 
   def application_for_unit(user, inviting_user, application)
-    subject    inviting_user.firstname + ' ' + inviting_user.lastname + 'has sent you a Rentlook application'
+    subject    inviting_user.firstname + ' ' + inviting_user.lastname + ' has sent you a Rentlook application'
     recipients user.email
     from       'accounts@rentlook.com'
     sent_on    Time.now
@@ -39,7 +39,7 @@ class AccountMailer < ActionMailer::Base
   end
 
   def application_update_for_unit(editing_user, notified_user, application)
-    subject    editing_user.firstname + ' ' + editing_user.lastname + 'has updated your application on Rentlook'
+    subject    editing_user.firstname + ' ' + editing_user.lastname + ' has updated your application on Rentlook'
     recipients notified_user.email
     from       'accounts@rentlook.com'
     sent_on    Time.now
@@ -57,7 +57,7 @@ class AccountMailer < ActionMailer::Base
   end
 
   def lease_for_unit(user, inviting_user, lease)
-    subject    inviting_user.firstname + ' ' + inviting_user.lastname + 'has sent you a Rentlook lease'
+    subject    inviting_user.firstname + ' ' + inviting_user.lastname + ' has sent you a Rentlook lease'
     recipients user.email
     from       'accounts@rentlook.com'
     sent_on    Time.now
@@ -66,7 +66,7 @@ class AccountMailer < ActionMailer::Base
   end
 
   def lease_update_for_unit(user, inviting_user, lease)
-    subject    inviting_user.firstname + ' ' + inviting_user.lastname + 'has sent you a Rentlook lease'
+    subject    inviting_user.firstname + ' ' + inviting_user.lastname + ' has updated your Rentlook lease'
     recipients user.email
     from       'accounts@rentlook.com'
     sent_on    Time.now

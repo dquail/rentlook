@@ -9,7 +9,7 @@ authorization do
     end
 
     #Unit Permissions
-    has_permission_on [:units], :to => [:index, :new, :create, :new_application]
+    has_permission_on [:units], :to => [:index, :new, :create, :new_application, :create_application]
     has_permission_on [:units], :to => [:show, :edit, :update, :destroy] do
       if_attribute :property => {:landlord => is {user}}
     end

@@ -33,6 +33,7 @@
                   <%= link_to "My Unit applications", applications_path %> |
                 <%elsif current_user.type=='Tenant'%>
                   <%= link_to "My applications", applications_path %> |
+                  <%= link_to "My leases", :controller => "leases", :action => "index" %> |
                 <%end%>
                 <%= link_to "Edit Profile", edit_user_path(:current) %> |
                 <%= link_to "Logout", logout_path %>

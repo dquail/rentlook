@@ -44,7 +44,7 @@ class LeasesController < ApplicationController
   # GET unit/1/leases/new
   # GET unit/1/leases/new.xml
   def new
-    #@unit = Unit.find(params[:unit_id])
+    @unit = Unit.find(params[:unit_id])
     @lease = @unit.leases.new
 
     respond_to do |format|
@@ -68,7 +68,7 @@ class LeasesController < ApplicationController
   # POST /unit/1/leases
   # POST /unit/1/leases.xml
   def create
-    #@unit = Unit.find(params[:unit_id])
+    @unit = Unit.find(params[:unit_id])
     @lease = @unit.leases.new(params[:lease])
 
     respond_to do |format|
@@ -93,7 +93,7 @@ class LeasesController < ApplicationController
         if @lease.landlord_approved && @lease.tenant_approved
           @lease.unit.update_attribute(:rented, true)
         end
-        if current_user==Tenant
+        if current_user.class ==Tenant
           @lease.deliver_lease_update_for_unit(@lease.unit.property.landlord, current_user)
         else
           @lease.deliver_lease_update_for_unit(@lease.tenant, current_user)

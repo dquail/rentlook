@@ -1,5 +1,5 @@
 class PropertiesController < ApplicationController
-  #filter_resource_access
+  filter_resource_access
   before_filter :authorize_landlord
 
   # GET /properties
@@ -16,7 +16,7 @@ class PropertiesController < ApplicationController
   # GET /properties/1
   # GET /properties/1.xml
   def show
-    @property = Property.find(params[:id])
+    #@property = Property.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -37,7 +37,7 @@ class PropertiesController < ApplicationController
 
   # GET /properties/1/edit
   def edit
-    @property = Property.find(params[:id])
+    #@property = Property.find(params[:id])
   end
 
   # POST /properties
@@ -68,7 +68,7 @@ class PropertiesController < ApplicationController
   # PUT /properties/1
   # PUT /properties/1.xml
   def update
-    @property = Property.find(params[:id])
+    #@property = Property.find(params[:id])
 
     respond_to do |format|
       if @property.update_attributes(params[:property])
@@ -85,7 +85,7 @@ class PropertiesController < ApplicationController
   # DELETE /properties/1
   # DELETE /properties/1.xml
   def destroy
-    @property = Property.find(params[:id])
+    #@property = Property.find(params[:id])
     @property.destroy
 
     respond_to do |format|
